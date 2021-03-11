@@ -7,7 +7,7 @@
     <table id="datagrid" class="table striped table-border mt-4"
            data-role="table"
            data-rows="5"
-           data-rows-steps="5, 10"
+           data-rows-steps="5, 10, 30"
            data-show-activity="false"
            data-rownum="true"
            data-check="true"
@@ -70,17 +70,6 @@
                     status: status
                 }
             }
-
-            {#$.ajax({#}
-            {#    url: "{{ path('participant_status') }}",#}
-            {#    type: "POST",#}
-            {#    data: JSON.stringify(users),#}
-            {#    dataType:"json",#}
-            {#    success: function(data){#}
-            {#        console.log(data);#}
-            {#        // $('#datagrid').data('table').reload(false);#}
-            {#    }#}
-            {#});#}
 
             let xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
