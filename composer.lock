@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "content-hash": "b85fd93c4b639c2d5ba2078623494ced",
+=======
+    "content-hash": "06c4bd050a9712a18865fc1688e762df",
+>>>>>>> test-project
     "packages": [
         {
             "name": "composer/package-versions-deprecated",
@@ -59,6 +63,13 @@
                 }
             ],
             "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/composer/package-versions-deprecated/issues",
+                "source": "https://github.com/composer/package-versions-deprecated/tree/1.11.99.1"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://packagist.com",
@@ -139,6 +150,13 @@
                 "docblock",
                 "parser"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/annotations/issues",
+                "source": "https://github.com/doctrine/annotations/tree/1.12.1"
+            },
+>>>>>>> test-project
             "time": "2021-02-21T21:00:45+00:00"
         },
         {
@@ -221,6 +239,13 @@
                 "redis",
                 "xcache"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/cache/issues",
+                "source": "https://github.com/doctrine/cache/tree/1.10.x"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",
@@ -300,6 +325,13 @@
                 "iterators",
                 "php"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/collections/issues",
+                "source": "https://github.com/doctrine/collections/tree/1.6.7"
+            },
+>>>>>>> test-project
             "time": "2020-07-27T17:53:49+00:00"
         },
         {
@@ -371,6 +403,13 @@
                 "doctrine",
                 "php"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/common/issues",
+                "source": "https://github.com/doctrine/common/tree/3.1.1"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",
@@ -478,6 +517,13 @@
                 "sqlserver",
                 "sqlsrv"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/dbal/issues",
+                "source": "https://github.com/doctrine/dbal/tree/2.12.1"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",
@@ -584,6 +630,13 @@
                 "orm",
                 "persistence"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/DoctrineBundle/issues",
+                "source": "https://github.com/doctrine/DoctrineBundle/tree/2.2.3"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",
@@ -668,6 +721,13 @@
                 "migrations",
                 "schema"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/DoctrineMigrationsBundle/issues",
+                "source": "https://github.com/doctrine/DoctrineMigrationsBundle/tree/3.0.2"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",
@@ -758,6 +818,13 @@
                 "event system",
                 "events"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/event-manager/issues",
+                "source": "https://github.com/doctrine/event-manager/tree/1.1.x"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",
@@ -849,6 +916,13 @@
                 "uppercase",
                 "words"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/inflector/issues",
+                "source": "https://github.com/doctrine/inflector/tree/2.0.x"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",
@@ -914,6 +988,13 @@
                 "constructor",
                 "instantiate"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/instantiator/issues",
+                "source": "https://github.com/doctrine/instantiator/tree/1.4.0"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",
@@ -990,6 +1071,13 @@
                 "parser",
                 "php"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/lexer/issues",
+                "source": "https://github.com/doctrine/lexer/tree/1.2.1"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",
@@ -1093,6 +1181,13 @@
                 "dbal",
                 "migrations"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/migrations/issues",
+                "source": "https://github.com/doctrine/migrations/tree/3.1.0"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",
@@ -1195,6 +1290,13 @@
                 "database",
                 "orm"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/orm/issues",
+                "source": "https://github.com/doctrine/orm/tree/2.8.2"
+            },
+>>>>>>> test-project
             "time": "2021-02-16T22:10:18+00:00"
         },
         {
@@ -1275,6 +1377,13 @@
                 "orm",
                 "persistence"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/persistence/issues",
+                "source": "https://github.com/doctrine/persistence/tree/2.1.0"
+            },
+>>>>>>> test-project
             "time": "2020-10-24T22:13:54+00:00"
         },
         {
@@ -1328,6 +1437,13 @@
                 "highlight",
                 "sql"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/doctrine/sql-formatter/issues",
+                "source": "https://github.com/doctrine/sql-formatter/tree/1.1.x"
+            },
+>>>>>>> test-project
             "time": "2020-07-30T16:57:33+00:00"
         },
         {
@@ -1396,6 +1512,13 @@
                 "proxy pattern",
                 "service proxies"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/FriendsOfPHP/proxy-manager-lts/issues",
+                "source": "https://github.com/FriendsOfPHP/proxy-manager-lts/tree/v1.0.3"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://github.com/Ocramius",
@@ -1463,6 +1586,17 @@
                 "laminas",
                 "laminasframework"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-code/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-code/issues",
+                "rss": "https://github.com/laminas/laminas-code/releases.atom",
+                "source": "https://github.com/laminas/laminas-code"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
@@ -1473,6 +1607,7 @@
         },
         {
             "name": "laminas/laminas-eventmanager",
+<<<<<<< HEAD
             "version": "3.3.1",
             "source": {
                 "type": "git",
@@ -1483,6 +1618,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laminas/laminas-eventmanager/zipball/966c859b67867b179fde1eff0cd38df51472ce4a",
                 "reference": "966c859b67867b179fde1eff0cd38df51472ce4a",
+=======
+            "version": "3.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laminas/laminas-eventmanager.git",
+                "reference": "1940ccf30e058b2fd66f5a9d696f1b5e0027b082"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laminas/laminas-eventmanager/zipball/1940ccf30e058b2fd66f5a9d696f1b5e0027b082",
+                "reference": "1940ccf30e058b2fd66f5a9d696f1b5e0027b082",
+>>>>>>> test-project
                 "shasum": ""
             },
             "require": {
@@ -1504,6 +1651,15 @@
                 "laminas/laminas-stdlib": "^2.7.3 || ^3.0, to use the FilterChain feature"
             },
             "type": "library",
+<<<<<<< HEAD
+=======
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.3.x-dev",
+                    "dev-develop": "3.4.x-dev"
+                }
+            },
+>>>>>>> test-project
             "autoload": {
                 "psr-4": {
                     "Laminas\\EventManager\\": "src/"
@@ -1521,13 +1677,28 @@
                 "events",
                 "laminas"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "chat": "https://laminas.dev/chat",
+                "docs": "https://docs.laminas.dev/laminas-eventmanager/",
+                "forum": "https://discourse.laminas.dev",
+                "issues": "https://github.com/laminas/laminas-eventmanager/issues",
+                "rss": "https://github.com/laminas/laminas-eventmanager/releases.atom",
+                "source": "https://github.com/laminas/laminas-eventmanager"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
                     "type": "community_bridge"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-03-08T15:24:29+00:00"
+=======
+            "time": "2020-08-25T11:10:44+00:00"
+>>>>>>> test-project
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
@@ -1577,6 +1748,15 @@
                 "laminas",
                 "zf"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "forum": "https://discourse.laminas.dev/",
+                "issues": "https://github.com/laminas/laminas-zendframework-bridge/issues",
+                "rss": "https://github.com/laminas/laminas-zendframework-bridge/releases.atom",
+                "source": "https://github.com/laminas/laminas-zendframework-bridge"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://funding.communitybridge.org/projects/laminas-project",
@@ -1665,6 +1845,13 @@
                 "logging",
                 "psr-3"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/Seldaek/monolog/issues",
+                "source": "https://github.com/Seldaek/monolog/tree/2.2.0"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://github.com/Seldaek",
@@ -1727,6 +1914,13 @@
                 "parser",
                 "php"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/nikic/PHP-Parser/issues",
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.10.4"
+            },
+>>>>>>> test-project
             "time": "2020-12-20T10:01:03+00:00"
         },
         {
@@ -1773,6 +1967,12 @@
                 "psr",
                 "psr-6"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/php-fig/cache/tree/master"
+            },
+>>>>>>> test-project
             "time": "2016-08-06T20:24:11+00:00"
         },
         {
@@ -1817,6 +2017,13 @@
                 "container-interop",
                 "psr"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/php-fig/container/issues",
+                "source": "https://github.com/php-fig/container/tree/1.1.1"
+            },
+>>>>>>> test-project
             "time": "2021-03-05T17:36:06+00:00"
         },
         {
@@ -1863,6 +2070,13 @@
                 "psr",
                 "psr-14"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/php-fig/event-dispatcher/issues",
+                "source": "https://github.com/php-fig/event-dispatcher/tree/1.0.0"
+            },
+>>>>>>> test-project
             "time": "2019-01-08T18:20:26+00:00"
         },
         {
@@ -1910,6 +2124,12 @@
                 "psr",
                 "psr-3"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/php-fig/log/tree/1.1.3"
+            },
+>>>>>>> test-project
             "time": "2020-03-23T09:12:05+00:00"
         },
         {
@@ -1984,6 +2204,13 @@
                 "annotations",
                 "controllers"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/sensiolabs/SensioFrameworkExtraBundle/issues",
+                "source": "https://github.com/sensiolabs/SensioFrameworkExtraBundle/tree/v6.1.1"
+            },
+>>>>>>> test-project
             "time": "2021-02-23T11:50:58+00:00"
         },
         {
@@ -2006,6 +2233,13 @@
                 "MIT"
             ],
             "description": "A pack for Apache support in Symfony",
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/symfony/apache-pack/issues",
+                "source": "https://github.com/symfony/apache-pack/tree/master"
+            },
+>>>>>>> test-project
             "time": "2017-12-12T01:46:35+00:00"
         },
         {
@@ -2058,6 +2292,12 @@
             ],
             "description": "Manages URL generation and versioning of web assets such as CSS stylesheets, JavaScript files and image files",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/asset/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2150,6 +2390,12 @@
                 "caching",
                 "psr6"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/cache/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2226,6 +2472,12 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/cache-contracts/tree/v2.2.0"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2301,6 +2553,12 @@
             ],
             "description": "Helps you find, load, combine, autofill and validate configuration values of any kind",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/config/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2395,6 +2653,12 @@
                 "console",
                 "terminal"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/console/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2470,6 +2734,12 @@
             ],
             "description": "Provides a tight integration of the Symfony Debug component into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/debug-bundle/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2554,6 +2824,12 @@
             ],
             "description": "Allows you to standardize and centralize the way objects are constructed in your application",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/dependency-injection/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2618,6 +2894,12 @@
             ],
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/deprecation-contracts/tree/master"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2729,6 +3011,12 @@
             ],
             "description": "Provides integration for Doctrine with various Symfony components",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/doctrine-bridge/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2796,6 +3084,12 @@
                 "env",
                 "environment"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/dotenv/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2862,6 +3156,12 @@
             ],
             "description": "Provides tools to manage errors and ease debugging PHP code",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/error-handler/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -2944,6 +3244,12 @@
             ],
             "description": "Provides tools that allow your application components to communicate with each other by dispatching events and listening to them",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/event-dispatcher/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3020,6 +3326,12 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/event-dispatcher-contracts/tree/v2.2.0"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3079,6 +3391,12 @@
             ],
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/filesystem/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3137,6 +3455,12 @@
             ],
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/finder/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3201,6 +3525,13 @@
                 }
             ],
             "description": "Composer plugin for Symfony",
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/symfony/flex/issues",
+                "source": "https://github.com/symfony/flex/tree/v1.12.2"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3299,6 +3630,12 @@
             ],
             "description": "Allows to easily create, process and reuse HTML forms",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/form/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3445,6 +3782,12 @@
             ],
             "description": "Provides a tight integration between Symfony components and the Symfony full-stack framework",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/framework-bundle/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3521,6 +3864,12 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/http-client-contracts/tree/v2.3.1"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3591,6 +3940,12 @@
             ],
             "description": "Defines an object-oriented layer for the HTTP specification",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/http-foundation/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3700,6 +4055,12 @@
             ],
             "description": "Provides a structured process for converting a Request into a Response",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/http-kernel/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3785,6 +4146,12 @@
                 "l10n",
                 "localization"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/intl/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3869,6 +4236,7 @@
                 "scaffold",
                 "scaffolding"
             ],
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3948,6 +4316,12 @@
                 "mime",
                 "mime-type"
             ],
+=======
+            "support": {
+                "issues": "https://github.com/symfony/maker-bundle/issues",
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.29.1"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -3962,7 +4336,11 @@
                     "type": "tidelift"
                 }
             ],
+<<<<<<< HEAD
             "time": "2021-02-15T18:55:04+00:00"
+=======
+            "time": "2021-02-10T19:21:31+00:00"
+>>>>>>> test-project
         },
         {
             "name": "symfony/monolog-bridge",
@@ -4027,6 +4405,12 @@
             ],
             "description": "Provides integration for Monolog with various Symfony components",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/monolog-bridge/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4104,6 +4488,13 @@
                 "log",
                 "logging"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/symfony/monolog-bundle/issues",
+                "source": "https://github.com/symfony/monolog-bundle/tree/v3.6.0"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4170,6 +4561,12 @@
                 "configuration",
                 "options"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/options-resolver/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4248,6 +4645,12 @@
                 "portable",
                 "shim"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/polyfill-intl-grapheme/tree/v1.22.1"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4332,6 +4735,7 @@
                 "portable",
                 "shim"
             ],
+<<<<<<< HEAD
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4416,6 +4820,11 @@
                 "portable",
                 "shim"
             ],
+=======
+            "support": {
+                "source": "https://github.com/symfony/polyfill-intl-icu/tree/v1.22.1"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4497,6 +4906,12 @@
                 "portable",
                 "shim"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/polyfill-intl-normalizer/tree/v1.22.1"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4574,6 +4989,12 @@
                 "portable",
                 "shim"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/polyfill-mbstring/tree/v1.22.1"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4650,6 +5071,12 @@
                 "portable",
                 "shim"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php73/tree/v1.22.1"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4730,6 +5157,12 @@
                 "portable",
                 "shim"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/polyfill-php80/tree/v1.22.1"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4808,6 +5241,12 @@
                 "property path",
                 "reflection"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/property-access/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4895,6 +5334,12 @@
                 "type",
                 "validator"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/property-info/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -4959,6 +5404,12 @@
             ],
             "description": "Provides integration for ProxyManager with various Symfony components",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/proxy-manager-bridge/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5021,6 +5472,13 @@
                 "configuration",
                 "distribution"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/symfony/requirements-checker/issues",
+                "source": "https://github.com/symfony/requirements-checker/tree/v2.0.0"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5108,6 +5566,12 @@
                 "uri",
                 "url"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/routing/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5204,6 +5668,12 @@
             ],
             "description": "Provides a tight integration of the Security component into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/security-bundle/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5290,6 +5760,12 @@
             ],
             "description": "Symfony Security Component - Core Library",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/security-core/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5358,6 +5834,12 @@
             ],
             "description": "Symfony Security Component - CSRF Library",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/security-csrf/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5422,6 +5904,12 @@
             ],
             "description": "Symfony Security Component - Guard",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/security-guard/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5502,6 +5990,12 @@
             ],
             "description": "Symfony Security Component - HTTP Integration",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/security-http/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5578,6 +6072,12 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/service-contracts/tree/master"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5637,6 +6137,12 @@
             ],
             "description": "Provides a way to profile code",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/stopwatch/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5717,6 +6223,12 @@
                 "utf-8",
                 "utf8"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/string/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5792,6 +6304,12 @@
                 "interoperability",
                 "standards"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/translation-contracts/tree/v2.3.0"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5909,6 +6427,12 @@
             ],
             "description": "Provides integration for Twig with various Symfony components",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/twig-bridge/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -5993,6 +6517,12 @@
             ],
             "description": "Provides a tight integration of Twig into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/twig-bundle/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -6101,6 +6631,12 @@
             ],
             "description": "Provides tools to validate values",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/validator/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -6186,6 +6722,12 @@
                 "debug",
                 "dump"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/var-dumper/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -6256,6 +6798,12 @@
                 "instantiate",
                 "serialize"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/var-exporter/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -6331,6 +6879,12 @@
             ],
             "description": "Provides a development tool that gives detailed information about the execution of any request",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/web-profiler-bundle/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -6403,6 +6957,12 @@
             ],
             "description": "Loads and dumps YAML files",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/symfony/yaml/tree/v5.2.4"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://symfony.com/sponsor",
@@ -6482,6 +7042,12 @@
                 "extra",
                 "twig"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.3.0"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://github.com/fabpot",
@@ -6554,6 +7120,13 @@
             "keywords": [
                 "templating"
             ],
+<<<<<<< HEAD
+=======
+            "support": {
+                "issues": "https://github.com/twigphp/Twig/issues",
+                "source": "https://github.com/twigphp/Twig/tree/v3.3.0"
+            },
+>>>>>>> test-project
             "funding": [
                 {
                     "url": "https://github.com/fabpot",
@@ -6579,5 +7152,9 @@
         "ext-iconv": "*"
     },
     "platform-dev": [],
+<<<<<<< HEAD
     "plugin-api-version": "1.1.0"
+=======
+    "plugin-api-version": "2.0.0"
+>>>>>>> test-project
 }

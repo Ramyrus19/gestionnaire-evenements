@@ -5,9 +5,102 @@
 {% block body %}
     <h1>Edit Sortie</h1>
 
-    {{ include('sortie/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="container">
+    {{ form_start(form) }}
 
-    <a href="{{ path('sortie_index') }}">back to list</a>
+        <div class="row">
+            <div class="col">
+              {{ form_row(form.nom) }}
+              {{ form_row(form.dateDebut) }}
+              {{ form_row(form.dateCloture) }}
+              {{ form_row(form.nbPlaces) }}
+              {{ form_row(form.duree) }}
+              {{ form_row(form.infos) }}
+              {{ form_widget(form.etat,  { 'attr' : { 'style':'display:none'} }) }}
 
-    {{ include('sortie/_delete_form.html.twig') }}
+             </div>
+            <div class="col">
+            
+            <label>Ville organisatrice</label>
+            <label>{{ ville_orga }}</label>
+
+<br>
+            <label>Ville :</label>
+            <select id="select_ville" onchange="ch_ville(this.value)">
+                {% for ville in villes %}<option value="{{ ville.id }}">{{ ville.nom }}</option>{% endfor %}
+            </select>
+
+<br>
+            <label>Lieu :</label>
+            {{ form_row(form.lieu) }}
+            <button>+</button>
+
+<br>
+            <label>Rue :</label>
+            <label id="la_rue"></label>
+
+<br>
+            <label>Code postal :</label>
+            <label id="le_cp"></label>
+
+<script>
+let bdd_lieux=[ // id, nom, rue, latitude, longitude, ville_id, ville_cp
+{% for lieu in lieux %}
+[{{ lieu.id }}, "{{ lieu.nom }}", "{{ lieu.rue }}", "{{ lieu.latitude }}", "{{ lieu.longitude }}", {{ lieu.ville.id }}, "{{ lieu.ville.cp }}" ],
+{% endfor %}
+0],
+
+_id=(vv)=>{
+    return document.getElementById(vv);
+},
+
+init=()=>{
+    ch_ville(_id("select_ville").firstElementChild.value);
+},
+
+ch_ville=(id_ville)=>{
+    let ot = "";
+    // lister les lieux selon id_ville
+    for(let i0=0, maxx0=bdd_lieux.length; i0<maxx0; i0++){
+        if(bdd_lieux[i0][5] == id_ville){
+            ot += add_option( bdd_lieux[i0][0], bdd_lieux[i0][1] ) ;
+        }
+    }
+    _id("sortie_lieu").innerHTML = ot;
+    ch_lieu(_id("sortie_lieu").firstElementChild.value);
+},
+
+ch_lieu=(id_lieu)=>{
+    // M.A.J affichage rue & cp
+    for(let i0=0, maxx0=bdd_lieux.length; i0<maxx0; i0++){
+        if(bdd_lieux[i0][0] == id_lieu){
+            _id("la_rue").innerHTML = bdd_lieux[i0][2];
+            _id("le_cp").innerHTML = bdd_lieux[i0][6];
+            break;
+        }
+    }
+},
+
+add_option=(id, nom)=>{
+    return "<option value='"+ id +"'>"+ nom +"</option>";
+};
+
+window.addEventListener("load",init,false);
+
+</script>
+
+            </div>
+        </div>
+         <button class="btn" onclick="_id('sortie_etat').value='1'">{{ button_label|default('Enregistrer') }}</button>
+
+         <button class="btn" onclick="_id('sortie_etat').value='2'">{{ button_label|default('Publier') }}</button>
+
+         <button class="btn" onclick="confirm('Quitter?')?document.location='{{ path('sortie_index') }}':0">{{ button_label|default('Annuler') }}</button>
+
+         
+    {{ form_end(form) }}
+<!--<button class="btn" onclick="confirm('Supprimer cette sortie?')?document.location=' path('sortie_supprimer', 'id': sortie.id) ':0"> button_label|default('Supprimer') </button>-->
+{{ include('sortie/_delete_form.html.twig') }}
+    </div>
+
 {% endblock %}

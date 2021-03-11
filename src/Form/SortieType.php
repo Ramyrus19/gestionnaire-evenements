@@ -2,7 +2,13 @@
 
 namespace App\Form;
 
+use App\Entity\Etat;
 use App\Entity\Sortie;
+use App\Entity\Site;
+use App\Entity\Lieu;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,16 +19,33 @@ class SortieType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('dateDebut')
+            ->add('dateDebut', DateTimeType::class, [
+                'widget' => 'single_text',
+                // this is actually the default format for single_text
+                //'format' => 'yyyy-MM-dd HH:mm',
+                //TODO: incompatible firefox
+            ])
             ->add('duree')
-            ->add('dateCloture')
+            ->add('dateCloture', DateType::class, [
+                'widget' => 'single_text',
+                // this is actually the default format for single_text
+                'format' => 'yyyy-MM-dd',
+            ])
             ->add('nbPlaces')
             ->add('infos')
-            ->add('lieu')
-            ->add('site')
-            ->add('etat')
-            ->add('organisateur')
-            ->add('participants')
+            ->add('etat' ,EntityType::class,[
+                'class'=> Etat::class,
+                'choice_label' =>'libelle'
+            ])
+            ->add('lieu',EntityType::class,[
+                'class' => Lieu::class,
+                'label' => false,
+                'choice_label' => 'nom',
+                'attr'=>[
+                    'onchange' => 'ch_lieu(this.value)'
+                ]
+            ])
+            //->add('participants', HiddenType::class, [])
         ;
     }
 

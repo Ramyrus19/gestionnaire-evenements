@@ -15,6 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
+
 /**
  * @Route("/participant")
  */
@@ -107,7 +108,6 @@ class ParticipantController extends AbstractController
                     $participant->setUrlPhoto($fileName);
                 }
             }
-
 
             $this->getDoctrine()->getManager()->flush();
 

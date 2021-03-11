@@ -99,14 +99,6 @@ class ParticipantType extends AbstractType
                         'data-role' => 'select',
                     ]
                 ]);
-//                ->add('sorties', EntityType::class, [
-//                    'class' => Sortie::class,
-//                    'choice_label' => 'nom',
-//                    'label' => false,
-//                    'attr' => [
-//                        'data-role' => 'select',
-//                    ]
-//                ]);
 
         }
     }
@@ -127,4 +119,5 @@ class ParticipantType extends AbstractType
         $this->security = $security;
         $this->requestStack = $requestStack;
     }
+
 }
