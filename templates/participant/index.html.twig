@@ -4,7 +4,6 @@
 
 {% block body %}
     <h1>Liste des utilisateurs</h1>
-<div class="test">
     <table id="datagrid" class="table striped table-border mt-4"
            data-role="table"
            data-rows="5"
@@ -52,7 +51,6 @@
         {% endfor %}
         </tbody>
     </table>
-</div>
     <a class="button success" href="{{ path('participant_new') }}" title="Créer utilisateur"><span class="mif-user-plus mif-2x"></span></a>
     <button class="button alert" onclick="changeStatus()" title="Désactiver utilisateur"><span class="mif-cancel mif-2x"></span></button>
     <button class="button info" onclick="changeStatus()" title="Activer utilisateur"><span class="mif-plus mif-2x"></span></button>
@@ -73,17 +71,27 @@
                 }
             }
 
+            {#$.ajax({#}
+            {#    url: "{{ path('participant_status') }}",#}
+            {#    type: "POST",#}
+            {#    data: JSON.stringify(users),#}
+            {#    dataType:"json",#}
+            {#    success: function(data){#}
+            {#        console.log(data);#}
+            {#        // $('#datagrid').data('table').reload(false);#}
+            {#    }#}
+            {#});#}
+
             let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    //TODO: reload the table component and not the full page
+                    document.location.reload();
+                    // $('#datagrid').data('table').reload(true);
+                }
+            };
             xhttp.open("POST", "{{ path('participant_status') }}", true);
             xhttp.send(JSON.stringify(users));
-            xhttp.onreadystatechange = function() {
-                if (xhttp.status === 200) {
-                    // $('#datagrid').table($('#datagrid').data('table'));
-                    $('#datagrid').data('table').reload($('#datagrid'));
-                } else {
-                    console.log('failed');
-                }
-            }
 
         }
 
