@@ -97,4 +97,9 @@ class Ville
 
         return $this;
     }
+
+    public function toJson(): ?string
+    {
+        return '{"id": "'.$this->id.'", "nom": "'.$this->nom.'", "cp": "'.$this->cp.'"}';
+    }
 }
