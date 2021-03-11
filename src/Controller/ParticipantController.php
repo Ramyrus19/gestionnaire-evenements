@@ -9,6 +9,7 @@ use App\Repository\ParticipantRepository;
 use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -151,9 +152,10 @@ class ParticipantController extends AbstractController
             $this->getDoctrine()->getManager()->persist($user);
         }
 
-        $this->getDoctrine()->getManager()->flush();
+        $users = $em->getRepository(Participant::class)->findAll();
+        $em->flush();
 
-        return $this->redirectToRoute('participant_index');
+        return new JsonResponse(json_encode($users));
     }
 
 }

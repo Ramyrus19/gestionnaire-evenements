@@ -5,10 +5,18 @@
 {% block body %}
     <h1>Site index</h1>
 
-    <table class="table">
+    <table class="table striped table-border mt-4"
+           data-role="table"
+           data-rows="5"
+           data-rows-steps="5, 10, 30"
+           data-show-activity="false"
+           data-rownum="true"
+           data-check="true"
+           data-check-style="2"
+           data-table-info-title="Afficher $1 à $2 de $3 entrées"
+    >
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
                 <th>actions</th>
             </tr>
@@ -16,11 +24,10 @@
         <tbody>
         {% for site in sites %}
             <tr>
-                <td>{{ site.id }}</td>
                 <td>{{ site.nom }}</td>
                 <td>
-                    <a href="{{ path('site_show', {'id': site.id}) }}">show</a>
-                    <a href="{{ path('site_edit', {'id': site.id}) }}">edit</a>
+                    <a class="button info" title="Afficher site" href="{{ path('site_show', {'id': site.id}) }}"><span class="mif-eye mif-2x"></span></a>
+                    <a class="button warning" title="Modifier site" href="{{ path('site_edit', {'id': site.id}) }}"><span class="mif-pencil mif-2x"></span></a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +38,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('site_new') }}">Create new</a>
+    <a class="button success" href="{{ path('site_new') }}" title="Créer utilisateur"><span class="mif-plus mif-2x"></span></a>
 {% endblock %}
