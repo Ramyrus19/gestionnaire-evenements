@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Lieu;
 use App\Form\LieuType;
 use App\Repository\LieuRepository;
+use App\Repository\VilleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @Route("/lieu")
@@ -46,6 +48,39 @@ class LieuController extends AbstractController
             'lieu' => $lieu,
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * @Route("/api_new", name="lieu_new_api", methods={"POST"})
+     */
+    public function api_new(EntityManagerInterface $em, Request $request, VilleRepository $repo2): Response
+    {
+        $obj = json_decode($request -> getContent());
+        $infos["message"]="error_vide";
+
+        if(isset($obj->nom) && isset($obj->rue) && isset($obj->latitude)
+        && isset($obj->longitude) && isset($obj->ville_id)
+        && $obj->nom!="" && $obj->rue!="" && $obj->latitude!=""
+        && $obj->longitude!="" && $obj->ville_id!=""){
+
+            $lieu = new Lieu();
+            $lieu->setNom($obj->nom);
+            $lieu->setRue($obj->rue);
+            $lieu->setLatitude($obj->latitude);
+            $lieu->setLongitude($obj->longitude);
+
+            $ville = $repo2->find((int)$obj->ville_id);
+            $lieu->setVille($ville);
+        
+            $em->persist($lieu);
+            $em->flush();
+            $infos["lieu_nom"] = $lieu->toJson();
+            $infos["ville"] = $ville->toJson();
+            $infos["message"] = "ok";
+
+        }
+        
+        return $this->json($infos);
     }
 
     /**

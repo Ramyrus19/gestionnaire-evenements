@@ -107,4 +107,9 @@ class Lieu
 
         return $this;
     }
+
+    public function toJson(): ?string
+    {
+        return '{"id":"'.$this->id.'","nom": "'.$this->nom.'", "rue": "'.$this->rue.'", "latitude": "'.$this->latitude.'", "longitude": "'.$this->longitude.'", "ville_id": "'.$this->ville->getId().'", "ville_cp": "'.$this->ville->getCp().'"}';
+    }
 }
