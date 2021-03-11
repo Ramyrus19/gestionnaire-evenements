@@ -5,41 +5,49 @@
 {% block body %}
     <h1>Sortie index</h1>
 
-    <table class="table">
+    <table id="datagrid" class="table striped table-border mt-4"
+    data-role="table"
+           data-rows="5"
+           data-rows-steps="5, 10"
+           data-show-activity="false"
+           data-rownum="true"
+           data-check="true"
+           data-check-style="2"
+           data-table-info-title="Listes des Sorties">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>DateDebut</th>
-                <th>Duree</th>
-                <th>DateCloture</th>
+                <th>Nom de la sortie</th>
+                <th data-sortable="true" data-sort-dir="asc">Date de la sortie</th>
+                <th>Cloture</th>
                 <th>NbPlaces</th>
-                <th>Infos</th>
-                <th>actions</th>
+                <th data-sortable="true" data-sort-dir="asc">Etat</th>
+                <th>Inscrit</th>
+                <th  data-sortable="true" data-sort-dir="asc">Organisateur</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for sortie in sorties %}
             <tr>
-                <td>{{ sortie.id }}</td>
                 <td>{{ sortie.nom }}</td>
                 <td>{{ sortie.dateDebut ? sortie.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ sortie.duree }}</td>
                 <td>{{ sortie.dateCloture ? sortie.dateCloture|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ sortie.nbPlaces }}</td>
-                <td>{{ sortie.infos }}</td>
+                <td>{{ sortie.etat.libelle }}</td>
+                <td></td>
+                <td>{{ sortie.organisateur.prenom }} {{ sortie.organisateur.nom }}</td>
                 <td>
-                    <a href="{{ path('sortie_show', {'id': sortie.id}) }}">show</a>
-                    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">edit</a>
+                    <a class="button info" title="Afficher sortie" href="{{ path('sortie_show', {'id': sortie.id}) }}"><span class="mif-eye mif-2x"></span></a>
+                    <a class="button warning" title="Modifier sortie" href="{{ path('sortie_edit', {'id': sortie.id}) }}"><span class="mif-pencil mif-2x"></span></a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Aucune sortie de prévu</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('sortie_new') }}">Create new</a>
+    <a class="button success" href="{{ path('sortie_new') }}" title="Créer une nouvelle Sortie"><span class="mif-plus"></span></a>
 {% endblock %}
