@@ -25,7 +25,7 @@ class RegistrationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $repo=$em->getRepository(Site::class);
-            $site=$repo->find(1);
+            $site=$repo->find(2);
             $user->setRoles(["ROLE_ADMIN"]);
             $user->setSite($site);
 
