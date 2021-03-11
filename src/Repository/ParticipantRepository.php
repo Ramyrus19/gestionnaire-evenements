@@ -53,15 +53,13 @@ class ParticipantRepository extends ServiceEntityRepository implements PasswordU
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Participant
+    public function findOneByPseudo($value): ?Participant
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+            ->andWhere('p.pseudo = :val')
             ->setParameter('val', $value)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }
