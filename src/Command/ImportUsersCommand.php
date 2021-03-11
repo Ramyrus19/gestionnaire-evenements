@@ -60,13 +60,14 @@ class ImportUsersCommand extends Command
                     $row['plainPassword']
                 )
             );
+
             $user->setPseudo($row['pseudo'])
                 ->setNom($row['nom'])
                 ->setPrenom($row['prenom'])
                 ->setTelephone($row['telephone'])
                 ->setMail($row['mail'])
-                ->setAdmin($row['admin'])
-                ->setActif($row['actif'])
+                ->setAdmin(filter_var($row['admin'], FILTER_VALIDATE_BOOLEAN))
+                ->setActif(filter_var($row['actif'], FILTER_VALIDATE_BOOLEAN))
                 ->setSite($site)
             ;
 
