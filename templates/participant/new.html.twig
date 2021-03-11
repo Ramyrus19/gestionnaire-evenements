@@ -1,11 +1,89 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Participant{% endblock %}
+{% block title %}Création utilisateur{% endblock %}
 
 {% block body %}
-    <h1>Create new Participant</h1>
+    <div class="cell-4 offset-4">
+        <div class="p-4">
+            <h4>Création utilisateur</h4>
 
-    {{ include('participant/_form.html.twig') }}
+            {% for flashError in app.flashes('verify_email_error') %}
+                <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+            {% endfor %}
 
-    <a href="{{ path('participant_index') }}">back to list</a>
+            {{ form_start(form) }}
+            <div class="row mb-2">
+                {{ form_label(form.pseudo, 'Pseudo :', { 'label_attr': {'class': 'cell-sm-6'} }) }}
+                <div class="cell-sm-6">
+                    {{ form_row(form.pseudo) }}
+                </div>
+            </div>
+            <div class="row mb-2">
+                {{ form_label(form.nom, 'Nom :', { 'label_attr': {'class': 'cell-sm-6'} }) }}
+                <div class="cell-sm-6">
+                    {{ form_row(form.nom) }}
+                </div>
+            </div>
+            <div class="row mb-2">
+                {{ form_label(form.prenom, 'Prénom :', { 'label_attr': {'class': 'cell-sm-6'} }) }}
+                <div class="cell-sm-6">
+                    {{ form_row(form.prenom) }}
+                </div>
+            </div>
+            <div class="row mb-2">
+                {{ form_label(form.plainPassword, 'Mot de passe :', { 'label_attr': {'class': 'cell-sm-6'} }) }}
+                <div class="cell-sm-6">
+                    {{ form_row(form.plainPassword) }}
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                {{ form_label(form.telephone, 'Téléphone :', { 'label_attr': {'class': 'cell-sm-6'} }) }}
+                <div class="cell-sm-6">
+                    {{ form_row(form.telephone) }}
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                {{ form_label(form.mail, 'Email :', { 'label_attr': {'class': 'cell-sm-6'} }) }}
+                <div class="cell-sm-6">
+                    {{ form_row(form.mail) }}
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                {{ form_label(form.admin, 'Admin :', { 'label_attr': {'class': 'cell-sm-6'} }) }}
+                <div class="cell-sm-6">
+                    {{ form_row(form.admin) }}
+                </div>
+            </div>
+            <div class="row mb-2">
+                {{ form_label(form.actif, 'Actif :', { 'label_attr': {'class': 'cell-sm-6'} }) }}
+                <div class="cell-sm-6">
+                    {{ form_row(form.actif) }}
+                </div>
+            </div>
+            <div class="row mb-2">
+                {{ form_label(form.actif, 'Termes et conditions :', { 'label_attr': {'class': 'cell-sm-6'} }) }}
+                <div class="cell-sm-6">
+                    {{ form_row(form.agreeTerms) }}
+                </div>
+            </div>
+            <div class="row mb-2">
+                {{ form_label(form.site, 'Site :', { 'label_attr': {'class': 'cell-sm-6'} }) }}
+                <div class="cell-sm-6">
+                    {{ form_row(form.site) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="cell">
+                    <button class="button success"><span class="mif-floppy-disk mif-2x"></span>&nbsp;&nbsp;Enregistrer</button>
+                    {{ form_end(form) }}
+                    <a class="button secondary" href="{{ path('participant_index') }}"><span class="mif-arrow-left mif-2x"></span>&nbsp;&nbsp;Retour à la liste</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
 {% endblock %}

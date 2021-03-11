@@ -27,13 +27,6 @@ class Etat
         return $this->id;
     }
 
-    public function setId(int $newid): self
-    {
-        $this->id = $newid;
-
-        return $this;
-    }
-
     public function getLibelle(): ?string
     {
         return $this->libelle;

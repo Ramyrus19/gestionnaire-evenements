@@ -36,7 +36,7 @@ class SortieController extends AbstractController
         $sortie->setSite($orga->getSite());
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($sortie);
             $entityManager->flush();
@@ -94,7 +94,6 @@ class SortieController extends AbstractController
         return $this->render('sortie/edit.html.twig', [
             'sortie' => $sortie,
             'form' => $form->createView(),
-            
             'villes' => $villes,
             'lieux' => $lieux,
             'ville_orga' => $ville_orga,

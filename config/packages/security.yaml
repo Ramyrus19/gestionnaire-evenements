@@ -18,6 +18,10 @@ security:
             anonymous: true
             lazy: true
             provider: app_user_provider
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800 # 1 week in seconds
+                path: /
             guard:
                 authenticators:
                     - App\Security\LoginFormAuthenticator
@@ -35,5 +39,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, role: ROLE_USER }
+        - { path: ^/participant/new, roles: ROLE_ADMIN }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }

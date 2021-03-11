@@ -3,23 +3,29 @@
 {% block title %}Participant index{% endblock %}
 
 {% block body %}
-    <h1>Participant index</h1>
-
-    <table class="table">
+    <h1>Liste des utilisateurs</h1>
+<div class="test">
+    <table id="datagrid" class="table striped table-border mt-4"
+           data-role="table"
+           data-rows="5"
+           data-rows-steps="5, 10"
+           data-show-activity="false"
+           data-rownum="true"
+           data-check="true"
+           data-check-style="2"
+           data-table-info-title="Afficher $1 à $2 de $3 entrées"
+    >
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Pseudo</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Telephone</th>
-                <th>Mail</th>
-                <th>Admin</th>
+                <th data-sortable="true" data-sort-dir="asc">Pseudo</th>
+                <th data-sortable="true" data-sort-dir="asc">Nom</th>
+                <th data-sortable="true" data-sort-dir="asc">Prénom</th>
+                <th>Téléphone</th>
+                <th>Email</th>
                 <th>Actif</th>
-                <th>UrlPhoto</th>
-                <th>actions</th>
+                <th>Admin</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -27,18 +33,16 @@
             <tr>
                 <td>{{ participant.id }}</td>
                 <td>{{ participant.pseudo }}</td>
-                <td>{{ participant.roles ? participant.roles|json_encode : '' }}</td>
-                <td>{{ participant.password }}</td>
                 <td>{{ participant.nom }}</td>
                 <td>{{ participant.prenom }}</td>
                 <td>{{ participant.telephone }}</td>
                 <td>{{ participant.mail }}</td>
-                <td>{{ participant.admin ? 'Yes' : 'No' }}</td>
-                <td>{{ participant.actif ? 'Yes' : 'No' }}</td>
-                <td>{{ participant.urlPhoto }}</td>
+                <td>{{ participant.actif ? 'Oui' : 'Non' }}</td>
+                <td>{{ participant.admin ? 'Oui' : 'Non' }}</td>
                 <td>
-                    <a href="{{ path('participant_show', {'id': participant.id}) }}">show</a>
-                    <a href="{{ path('participant_edit', {'id': participant.id}) }}">edit</a>
+                    <a class="button info" title="Afficher utilisateur" href="{{ path('participant_show', {'id': participant.id}) }}"><span class="mif-eye mif-2x"></span></a>
+                    <a class="button warning" title="Modifier utilisateur" href="{{ path('participant_edit', {'id': participant.id}) }}"><span class="mif-pencil mif-2x"></span></a>
+                    {{ include('participant/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
@@ -48,6 +52,42 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('participant_new') }}">Create new</a>
+</div>
+    <a class="button success" href="{{ path('participant_new') }}" title="Créer utilisateur"><span class="mif-user-plus mif-2x"></span></a>
+    <button class="button alert" onclick="changeStatus()" title="Désactiver utilisateur"><span class="mif-cancel mif-2x"></span></button>
+    <button class="button info" onclick="changeStatus()" title="Activer utilisateur"><span class="mif-plus mif-2x"></span></button>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+
+        function changeStatus(){
+            let tableData = $('#datagrid').data('table').getSelectedItems();
+            let users = {};
+            for (let i = 0; i < tableData.length; i++){
+                let status = tableData[i][6] === 'Oui';
+                users[i] = {
+                    id: tableData[i][0],
+                    status: status
+                }
+            }
+
+            let xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "{{ path('participant_status') }}", true);
+            xhttp.send(JSON.stringify(users));
+            xhttp.onreadystatechange = function() {
+                if (xhttp.status === 200) {
+                    // $('#datagrid').table($('#datagrid').data('table'));
+                    $('#datagrid').data('table').reload($('#datagrid'));
+                } else {
+                    console.log('failed');
+                }
+            }
+
+        }
+
+    </script>
+
+{% endblock %}
+
