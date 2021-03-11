@@ -72,8 +72,8 @@ class LieuController extends AbstractController
             $ville = $repo2->find((int)$obj->ville_id);
             $lieu->setVille($ville);
         
-            //$em->persist($lieu);
-            //$em->flush();
+            $em->persist($lieu);
+            $em->flush();
             $infos["lieu_nom"] = $lieu->toJson();
             $infos["ville"] = $ville->toJson();
             $infos["message"] = "ok";
