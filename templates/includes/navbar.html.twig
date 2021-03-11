@@ -1,0 +1,23 @@
+<header data-role="appbar" class="container-fluid pos-relative bg-brand app-bar app-bar-expand" data-expand-point="md" data-role-appbar="true"><button type="button" class="hamburger menu-down dark hidden"><span class="line"></span><span class="line"></span><span class="line"></span></button>
+    <a href="{{ path('sortie_index') }}" class="brand no-hover">
+        <img src="{{ asset('images/logo-sortir_120px.png') }}" alt="">
+    </a>
+    {% if is_granted('ROLE_USER') %}
+        <ul class="app-bar-menu ml-auto collapsed">
+            {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{ path('ville_index') }}">Villes</a></li>
+                <li><a href="{{ path('site_index') }}">Sites</a></li>
+                <li><a href="{{ path('participant_index') }}">Utilisateurs</a></li>
+            {% endif %}
+
+            <li><a href="{{ path('sortie_index') }}">Accueil</a></li>
+            {% if app.user %}
+                <li><a href="{{ path('participant_edit', {id: app.user.id}) }}">Mon profil</a></li>
+            {% endif %}
+
+            {% if app.user %}
+                <li><a href="{{ path('app_logout') }}" class="text-bold fg-blue"><span class="d-block">Se déconnecter</span></a></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+</header>

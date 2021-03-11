@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Participant{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="cell-2 offset-2 img-container">
+{#            <img class="img-fluid" src="{{ asset('images/zebra-character.jpg') }}">#}
+            <img class="img-fluid" width="120px" src="{{ asset('uploads/photos/' ~ participant.urlPhoto) }}">
+
+        </div>
+
+        <div class="cell-4">
+            <div class="p-4">
+                <h4>Gestion profil</h4>
+
+                {{ include('participant/_form.html.twig', {'button_label': 'Update'}) }}
+                <div class="row">
+                    <div class="cell">
+                        <button class="button success"><span class="mif-floppy-disk mif-2x"></span>&nbsp;&nbsp;Enregistrer</button>
+                        {{ form_end(form) }}
+
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <a class="button secondary" href="{{ path('participant_index') }}"><span class="mif-arrow-left mif-2x"></span>&nbsp;&nbsp;Retour à la liste</a>
+                            {{ include('participant/_delete_form.html.twig') }}
+                        {% else %}
+                            <a class="button secondary" href="{{ path('sortie_index') }}"><span class="mif-arrow-left mif-2x"></span>&nbsp;&nbsp;Retour à l'accueil</a>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

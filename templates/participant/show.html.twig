@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participant{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="cell-2 offset-2 img-container">
+{#            <img class="img-fluid" src="{{ asset('images/zebra-character.jpg') }}">#}
+            <img class="img-fluid" src="{{ asset('uploads/photos/' ~ participant.urlPhoto) }}">
+        </div>
+
+        <div class="cell-4">
+            <div class="p-4">
+                <h4>{{ participant.pseudo }}</h4>
+                <form>
+                    <div class="row mb-2">
+                        <label class="cell-sm-6">Prénom :</label>
+                        <div class="cell-sm-6">
+                            <p>{{ participant.prenom }}</p>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label class="cell-sm-6">Nom :</label>
+                        <div class="cell-sm-6">
+                            <p>{{ participant.nom }}</p>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label class="cell-sm-6">Téléphone :</label>
+                        <div class="cell-sm-6">
+                            <p>{{ participant.telephone }}</p>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label class="cell-sm-6">Email :</label>
+                        <div class="cell-sm-6">
+                            <p>{{ participant.mail }}</p>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label class="cell-sm-6">Ville de rattachement :</label>
+                        <div class="cell-sm-6">
+                            <p>{{ participant.site.nom }}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="cell">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a class="button secondary" href="{{ path('participant_index') }}"><span class="mif-arrow-left mif-2x"></span> Retour à la liste</a>
+                            {% else %}
+                                <a class="button secondary" href="{{ path('sortie_index') }}"><span class="mif-arrow-left mif-2x"></span> Retour à l'accueil</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
