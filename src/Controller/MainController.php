@@ -16,8 +16,16 @@ class MainController extends AbstractController
      */
     public function index(SortieRepository $sortieRepository): Response
     {
+/*         $sorties = $sortieRepository->findAll();
+foreach ($sorties as $sortie){
+    dump($sortie->getParticipants()->getValues());
+    
+}die(); */
         return $this->render('sortie/index.html.twig', [
             'sorties' => $sortieRepository->findAll(),
+            
         ]);
     }
+
+    //TODO: function changement etat (doc DiagEtatSortie.pdf)
 }

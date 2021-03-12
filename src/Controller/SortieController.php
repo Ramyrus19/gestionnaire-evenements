@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Sortie;
 use App\Entity\Etat;
+use App\Entity\Participant;
 use App\Form\SortieType;
 use App\Repository\ParticipantRepository;
 use App\Repository\VilleRepository;
 use App\Repository\LieuRepository;
 use App\Repository\EtatRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -110,4 +112,28 @@ class SortieController extends AbstractController
 
         return $this->redirectToRoute('sortie_index');
     }
+    /**
+     * @Route("/{action}/{idSortie}/{idParticipant}", name="sortie_inscription", methods={"GET", "POST"})
+     */
+    public function inscription(Request $request, $action, $idSortie, $idParticipant, EntityManagerInterface $em): Response
+    {
+        //idée ajouter un statut dans le chemin genre "ins" et "dés"
+        //si action == inscription => incrire elseif desinscription desinscrire
+        $sortie = $em->getRepository(Sortie::class)->find($idSortie);
+        $participant = $em->getRepository(Participant::class)->find($idParticipant);
+
+        if ($action==='ins' && $sortie->getNbPlaces() > $sortie->getParticipants()->count() ){
+            $sortie->addParticipant($participant);
+        }elseif($action==='des'){
+            $sortie->removeParticipant($participant);
+        }
+        
+        $em->persist($sortie);
+        $em->flush();
+
+        return $this->redirectToRoute('sortie_index');
+    }
+
+
+
 }
