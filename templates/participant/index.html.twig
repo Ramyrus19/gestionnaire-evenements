@@ -54,6 +54,7 @@
     <a class="button success" href="{{ path('participant_new') }}" title="Créer utilisateur"><span class="mif-user-plus mif-2x"></span></a>
     <button class="button alert" onclick="changeStatus()" title="Désactiver utilisateur"><span class="mif-cancel mif-2x"></span></button>
     <button class="button info" onclick="changeStatus()" title="Activer utilisateur"><span class="mif-plus mif-2x"></span></button>
+    {{ include('participant/_import_form.html.twig') }}
 {% endblock %}
 
 {% block javascripts %}
