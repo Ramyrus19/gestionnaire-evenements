@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialisez votre mot de passe{% endblock %}
+
+{% block body %}
+    <div class="cell-6 offset-4">
+        <div class="p-4">
+            <h4>Réinitialisez votre mot de passe</h4>
+
+            {{ form_start(resetForm) }}
+            <div class="row mb-2">
+                {{ form_label(resetForm.plainPassword.first, 'Nouveau mot de passe :', { 'label_attr': {'class': 'cell-sm-6'} }) }}
+                <div class="cell-sm-6">
+                    {{ form_row(resetForm.plainPassword.first) }}
+                </div>
+            </div>
+            <div class="row mb-2">
+                {{ form_label(resetForm.plainPassword.second, 'Confirmer mot de passe :', { 'label_attr': {'class': 'cell-sm-6'} }) }}
+                <div class="cell-sm-6">
+                    {{ form_row(resetForm.plainPassword.second) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="cell">
+                    <button class="button secondary">Réinitialisez</button>
+                    {{ form_end(resetForm) }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

@@ -79,7 +79,7 @@ class ParticipantController extends AbstractController
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_ANONYMOUSLY');
 
         $participant = new Participant();
         $form = $this->createForm(RegistrationFormType::class, $participant);
