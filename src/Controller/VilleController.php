@@ -53,8 +53,11 @@ class VilleController extends AbstractController
      */
     public function show(Ville $ville): Response
     {
+        $lieux = $ville->getLieux()->getValues();
+
         return $this->render('ville/show.html.twig', [
             'ville' => $ville,
+            'lieux' => $lieux
         ]);
     }
 

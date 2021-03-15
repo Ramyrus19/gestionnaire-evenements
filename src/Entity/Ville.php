@@ -30,7 +30,7 @@ class Ville
     private $cp;
 
     /**
-     * @ORM\OneToMany(targetEntity=Lieu::class, mappedBy="ville")
+     * @ORM\OneToMany(targetEntity=Lieu::class, mappedBy="ville", cascade="remove")
      */
     private $lieux;
 

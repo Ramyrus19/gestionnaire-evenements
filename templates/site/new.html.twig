@@ -1,11 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Site{% endblock %}
+{% block title %}Création site{% endblock %}
 
 {% block body %}
-    <h1>Create new Site</h1>
+    <div class="cell-4 offset-4">
+        <div class="p-4">
+            <h4>Création site</h4>
 
-    {{ include('site/_form.html.twig') }}
+            {{ include('site/_form.html.twig') }}
 
-    <a href="{{ path('site_index') }}">back to list</a>
+            <div class="row">
+                <div class="cell">
+                    <button class="button success"><span class="mif-floppy-disk mif-2x"></span></button>
+                    {{ form_end(form) }}
+                    <a class="button secondary" href="{{ path('site_index') }}"><span class="mif-arrow-left mif-2x"></span>&nbsp;&nbsp;Retour à la liste</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
 {% endblock %}

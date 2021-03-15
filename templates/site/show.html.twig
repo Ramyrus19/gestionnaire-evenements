@@ -3,24 +3,25 @@
 {% block title %}Site{% endblock %}
 
 {% block body %}
-    <h1>Site</h1>
+    <div class="row">
+        <div class="cell-4 offset-4">
+            <div class="p-4">
+                <h4>Site</h4>
+                <form>
+                    <div class="row mb-2">
+                        <label class="cell-sm-6">Nom :</label>
+                        <div class="cell-sm-6">
+                            <p>{{ site.nom }}</p>
+                        </div>
+                    </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ site.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ site.nom }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('site_index') }}">back to list</a>
-
-    <a href="{{ path('site_edit', {'id': site.id}) }}">edit</a>
-
-    {{ include('site/_delete_form.html.twig') }}
+                    <div class="row">
+                        <div class="cell">
+                            <a class="button secondary" href="{{ path('site_index') }}"><span class="mif-arrow-left mif-2x"></span>&nbsp;&nbsp;Retour à la liste</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}
