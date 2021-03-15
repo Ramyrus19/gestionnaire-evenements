@@ -79,7 +79,7 @@ class ParticipantController extends AbstractController
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_ANONYMOUSLY');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
         $participant = new Participant();
         $form = $this->createForm(RegistrationFormType::class, $participant);
@@ -147,10 +147,11 @@ class ParticipantController extends AbstractController
                     );
                 }
                 //upload file by using the FileUploader service
-                if ($form->getData()->getUrlPhoto() !== null){
+                if ($form->get('urlPhoto')->getData() !== null){
                     $file = $form->get('urlPhoto')->getData();
                     if ($file) {
                         $fileName = $fileUploader->upload($file);
+
                         $participant->setUrlPhoto($fileName);
                     }
                 }
