@@ -7,10 +7,13 @@ use App\Entity\Site;
 use App\Form\ParticipantType;
 use App\Form\RegistrationFormType;
 use App\Repository\ParticipantRepository;
+use App\Service\CsvImport;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Validator\Constraints\File;
 
 
 /**
@@ -27,14 +31,46 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ParticipantController extends AbstractController
 {
     /**
-     * @Route("/", name="participant_index", methods={"GET"})
+     * @Route("/", name="participant_index", methods={"GET", "POST"})
      */
-    public function index(ParticipantRepository $participantRepository): Response
+    public function index(Request $request, ParticipantRepository $participantRepository, CsvImport $csvImport): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $form = $this->createFormBuilder()
+            ->add('csvfile', FileType::class, [
+                'label' => false,
+                'mapped' => false,
+                'required' => true,
+                'attr' => [
+                    'accept'=> ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                ],
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2048k',
+                        'mimeTypes' => [
+                            'application/vnd.ms-excel',
+                            'text/plain',
+                            'text/csv',
+                        ],
+                        'mimeTypesMessage' => 'Format invalid ! Format accepté: csv',
+                    ])
+                ],
+            ])
+            ->getForm();
+        $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('csvfile')->getData();
+            $csvImport->import($file);
+            $this->addFlash(
+                'notice',
+                'Fichier importé avec success !'
+            );
+            return $this->redirectToRoute('participant_index');
+        }
         return $this->render('participant/index.html.twig', [
             'participants' => $participantRepository->findAll(),
+            'import_form' => $form->createView()
         ]);
     }
 
@@ -171,50 +207,4 @@ class ParticipantController extends AbstractController
         return new JsonResponse(json_encode($users));
     }
 
-    /**
-     * @Route("/import", name="participant_import", methods={"POST"})
-     */
-    public function importCsv(Request $request, EntityManagerInterface $em, UserPasswordEncoderInterface $passwordEncoder){
-
-//        $file = $form->get('urlPhoto')->getData();
-//        if ($file) {
-//            $fileName = $fileUploader->upload($file);
-//            $participant->setUrlPhoto($fileName);
-//        }
-//        $reader = Reader::createFromPath('%kernel.root_dir%/../public/imports/MOCK_DATA.csv');
-//
-//        $results = $reader->getRecords(['pseudo', 'nom', 'prenom', 'telephone', 'mail','admin','actif','site','plainPassword']);
-//
-//        foreach ($results as $row) {
-//            $site = new Site();
-//            $site->setNom($row['site']);
-//            $em->persist($site);
-//            $user = new Participant();
-//            $user->setPassword(
-//                $passwordEncoder->encodePassword(
-//                    $user,
-//                    $row['plainPassword']
-//                )
-//            );
-//
-//            $user->setPseudo($row['pseudo'])
-//                ->setNom($row['nom'])
-//                ->setPrenom($row['prenom'])
-//                ->setTelephone($row['telephone'])
-//                ->setMail($row['mail'])
-//                ->setAdmin(filter_var($row['admin'], FILTER_VALIDATE_BOOLEAN))
-//                ->setActif(filter_var($row['actif'], FILTER_VALIDATE_BOOLEAN))
-//                ->setSite($site)
-//            ;
-//
-//            $em->persist($user);
-//
-//        }
-//
-//        $em->flush();
-
-        return $this->render(''
-
-        );
-    }
 }

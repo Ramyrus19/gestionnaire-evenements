@@ -3,6 +3,13 @@
 {% block title %}Participant index{% endblock %}
 
 {% block body %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-notice bg-green fg-white padding10 text-shadow">
+                &nbsp;{{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     <h1>Liste des utilisateurs</h1>
     <table id="datagrid" class="table striped table-border mt-4"
            data-role="table"
@@ -54,12 +61,36 @@
     <a class="button success" href="{{ path('participant_new') }}" title="Créer utilisateur"><span class="mif-user-plus mif-2x"></span></a>
     <button class="button alert" onclick="changeStatus()" title="Désactiver utilisateur"><span class="mif-cancel mif-2x"></span></button>
     <button class="button info" onclick="changeStatus()" title="Activer utilisateur"><span class="mif-plus mif-2x"></span></button>
-    {{ include('participant/_import_form.html.twig') }}
+    <div class="dialog" data-role="dialog" data-close-button="true" id="importCsv">
+        <div class="dialog-title">Importer à partir d'un fichier CSV</div>
+        <div class="dialog-content">
+            {{ form_start(import_form, {'attr': {'id': 'import-form'}}) }}
+                <div id="import-error" style="color: red"></div>
+                {{ form_row(import_form.csvfile) }}
+        </div>
+        <div class="dialog-actions">
+            <button class="button success" title="Importer des utilisateurs">Importer</button>
+            {{ form_end(import_form) }}
+        </div>
+    </div>
+    <button class="button primary"
+            onclick="Metro.dialog.open('#importCsv')">Importer CSV</button>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script>
+
+        $('#import-form').submit(function(e) {
+
+            e.preventDefault();
+            let extension = document.getElementById("form_csvfile").value.split('.').pop();
+            if (extension !== "csv"){
+                document.getElementById("import-error").innerHTML = "Format invalid ! Choisissez un fichier .csv !";
+            }else{
+                document.forms["import-form"].submit();
+            }
+        });
 
         function changeStatus(){
             let tableData = $('#datagrid').data('table').getSelectedItems();
