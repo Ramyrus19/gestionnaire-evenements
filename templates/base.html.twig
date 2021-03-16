@@ -26,6 +26,27 @@
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
             <script src="https://cdn.metroui.org.ua/v4/js/metro.min.js"></script>
+            <script>
+                function deleteDialog(title, article){
+                    Metro.dialog.create({
+                        title: "Suppression "+title,
+                        content: "<div>Voulez-vous vraiment supprimer "+ article +" "+ title +" ?</div>",
+                        actions: [
+                            {
+                                caption: "Supprimer",
+                                cls: "js-dialog-close alert",
+                                onclick: function(){
+                                    document.forms["delete-form"].submit();
+                                }
+                            },
+                            {
+                                caption: "Annuler",
+                                cls: "js-dialog-close"
+                            }
+                        ]
+                    });
+                }
+            </script>
         {% endblock %}
 
     </body>

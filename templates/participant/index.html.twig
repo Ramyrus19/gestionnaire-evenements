@@ -105,7 +105,23 @@
             changeStatus('disable');
         }
         function deleteUsers(){
-            changeStatus('delete');
+            Metro.dialog.create({
+                title: "Suppression utilisateurs",
+                content: "<div>Voulez-vous vraiment supprimer ces utilisateurs ?</div>",
+                actions: [
+                    {
+                        caption: "Supprimer",
+                        cls: "js-dialog-close alert",
+                        onclick: function(){
+                            changeStatus('delete');
+                        }
+                    },
+                    {
+                        caption: "Annuler",
+                        cls: "js-dialog-close"
+                    }
+                ]
+            });
         }
 
         function changeStatus(status){
