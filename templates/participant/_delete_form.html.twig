@@ -1,7 +1,8 @@
 {#TODO : style message de confirmation suppression #}
 
-<form style="display: inline" method="post" action="{{ path('participant_delete', {'id': participant.id}) }}" onsubmit="return confirm('Vous voulez vraiment supprimer cet utilisateur ?');">
+<form style="display: inline" method="post" action="{{ path('participant_delete', {'id': participant.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ participant.id) }}">
     <button class="button alert" title="Supprimer utilisateur"><span class="mif-user-minus mif-2x"></span></button>
 </form>
+

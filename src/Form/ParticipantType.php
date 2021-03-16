@@ -30,28 +30,46 @@ class ParticipantType extends AbstractType
         $currentUser = $this->security->getUser();
         $builder
             ->add('pseudo', TextType::class, [
-                'label' => false
+                'label' => false,
+                'attr' => [
+                    'data-role' => 'input',
+                ]
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
-                'options' => ['attr' => ['class' => 'password-field']],
+                'options' => ['attr' => [
+                    'class' => 'password-field',
+                    'data-role' => 'input',
+                ]],
                 'required' => false,
                 'mapped' => false,
                 'first_options'  => ['label' => false],
                 'second_options' => ['label' => false],
             ])
             ->add('nom', TextType::class, [
-                'label' => false
+                'label' => false,
+                'attr' => [
+                    'data-role' => 'input',
+                ]
             ])
             ->add('prenom', TextType::class, [
-                'label' => false
+                'label' => false,
+                'attr' => [
+                    'data-role' => 'input',
+                ]
             ])
             ->add('telephone', TelType::class, [
-                'label' => false
+                'label' => false,
+                'attr' => [
+                    'data-role' => 'input',
+                ]
             ])
             ->add('mail', EmailType::class, [
-                'label' => false
+                'label' => false,
+                'attr' => [
+                    'data-role' => 'input',
+                ]
             ]);
             if (in_array('ROLE_USER', $options['role']) && $currentUser->getId() == $paramId) {
                 $builder
@@ -70,6 +88,10 @@ class ParticipantType extends AbstractType
                                 'mimeTypesMessage' => 'Format image invalid ! Formats acceptés: png, jpg, jpeg',
                             ])
                         ],
+                        'attr' => [
+                            'data-role' => 'file',
+                            'data-button-title' => "<span class='mif-folder-plus mif-2x'></span>"
+                        ]
                     ]);
             }
 

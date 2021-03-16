@@ -4,11 +4,15 @@
 
 {% block body %}
     <div class="row">
-        <div class="cell-2 offset-2 img-container">
-            <img class="img-fluid" src="{{ asset('uploads/photos/' ~ participant.urlPhoto) }}">
+        <div class="cell-lg-2 cell-md-3 offset-lg-3 img-container mt-4">
+            {% if participant.urlPhoto %}
+                <img class="img-fluid" src="{{ asset('uploads/' ~ participant.urlPhoto) }}">
+            {% else %}
+                <img class="img-fluid" src="{{ asset('images/no-image.png') }}">
+            {% endif %}
         </div>
 
-        <div class="cell-4">
+        <div class="cell-lg-4 cell-md-9">
             <div class="p-4">
                 <h4>{{ participant.pseudo }}</h4>
                 <form>
