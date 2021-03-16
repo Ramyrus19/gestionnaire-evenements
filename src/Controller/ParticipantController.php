@@ -61,11 +61,19 @@ class ParticipantController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('csvfile')->getData();
-            $csvImport->import($file);
-            $this->addFlash(
-                'notice',
-                'Fichier importé avec success !'
-            );
+            $response = $csvImport->import($file);
+            if ($response->getContent() === 'success'){
+                $this->addFlash(
+                    'success',
+                    'Fichier importé avec success !'
+                );
+            }else{
+                $this->addFlash(
+                    'duplicate',
+                    'Erreur import ! Doublons !'
+                );
+            }
+
             return $this->redirectToRoute('participant_index');
         }
         return $this->render('participant/index.html.twig', [

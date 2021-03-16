@@ -3,12 +3,15 @@
 {% block title %}Participant index{% endblock %}
 
 {% block body %}
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="flash-notice bg-green fg-white padding10 text-shadow">
-                &nbsp;{{ message }}
-            </div>
-        {% endfor %}
+    {% for message in app.flashes('success') %}
+        <div class="bg-green fg-white padding10 text-shadow">
+            &nbsp;{{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('duplicate') %}
+        <div class="bg-red fg-white padding10 text-shadow">
+            &nbsp;{{ message }}
+        </div>
     {% endfor %}
     <h1>Liste des utilisateurs</h1>
 
