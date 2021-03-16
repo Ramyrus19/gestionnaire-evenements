@@ -5,6 +5,39 @@
 {% block body %}
     <h1>Sortie index</h1>
 
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">{{ message }}</div>
+    {% endfor %}
+
+    <h5>Filtrer les sorties</h5>
+
+    <div>
+    <form action="{{ path("sortie_index") }}" method="POST">
+    <div>Site : <select name="filter_site">
+                <option value="">(Indéfini)</option>
+                {% for site in sites %}<option value="{{ site.id }}">{{ site.nom }}</option>{% endfor %}
+            </select><br>
+    <label>
+     nom de sortie :
+     </label>
+     <input type="text" data-role="input" data-search-button="true" name="filter_nom">
+     
+     <br> date :<input type="date" name="filtre_datedebut"> <input type="date" name="filtre_datefin"> 
+     
+     </div>
+    <div>
+    <input type="checkbox" name="filter_orga">Sorties dont je suis l'organisateur/trice<br>
+    <input type="checkbox" name="filter_inscrit">Sorties auxquelles je suis inscrit/e <br>
+    <input type="checkbox" name="filter_pas_inscrit">Sorties auxquelles je ne suis pas inscrit/e<br>
+    <input type="checkbox" name="filter_passees">Sorties passées<br>
+    </div>
+    <div>
+    Date du jour : {{ "now"|date("Y-m-d") }}<br>
+    Participant : {{ app.user.userName }}<br>
+    <input type="submit" value="rechercher"></div>
+    </form>
+    </div>
+
     <table id="datagrid" class="table striped table-border mt-4"
     data-role="table"
            data-rows="5"

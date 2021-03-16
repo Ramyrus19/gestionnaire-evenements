@@ -64,8 +64,10 @@ class SortieController extends AbstractController
      */
     public function show(Sortie $sortie): Response
     {
+        $ville_orga = $sortie->getOrganisateur()->getSite()->getNom();
         return $this->render('sortie/show.html.twig', [
             'sortie' => $sortie,
+            'ville_orga' => $ville_orga,
         ]);
     }
 
@@ -103,14 +105,33 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="sortie_delete", methods={"DELETE"})
+     * @Route("/{id}/annuler", name="sortie_annuler", methods={"GET","POST"})
      */
-    public function delete(Request $request, Sortie $sortie, EtatRepository $repo1): Response
+    public function annuler(Request $request, Sortie $sortie, EtatRepository $repo1, UserInterface $user): Response
     {
-        $sortie->setEtat($repo1->find(6));
-        $this->getDoctrine()->getManager()->flush();
+        if($sortie->getOrganisateur()->getPseudo() == $user->getUsername() || $this->isGranted('ROLE_ADMIN') ){
+            $form = $this->createForm(SortieType::class, $sortie);
+            $form->handleRequest($request);
 
-        return $this->redirectToRoute('sortie_index');
+            // editeur == organisateur
+            if ($form->isSubmitted() && $form->isValid()) {
+                $sortie->setEtat($repo1->find(6));
+                $this->getDoctrine()->getManager()->flush();
+    
+                return $this->redirectToRoute('sortie_index');
+            }
+
+            $ville_orga = $sortie->getOrganisateur()->getSite()->getNom();
+
+            return $this->render('sortie/annuler.html.twig', [
+                'sortie' => $sortie,
+                'form' => $form->createView(),
+                'ville_orga' => $ville_orga,
+            ]);
+        }else{
+            $this->addFlash('notice','Vous n\'avez pas les droits pour annuler.');
+            return $this->redirectToRoute('sortie_index');
+        }
     }
     /**
      * @Route("/{action}/{idSortie}/{idParticipant}", name="sortie_inscription", methods={"GET", "POST"})

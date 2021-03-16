@@ -19,6 +19,25 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
+    public function findByNameLike($namelike){
+        return $this->createQueryBuilder("s")
+            ->andWhere("s.nom like :val")
+            ->setParameter("val", "%".$namelike."%")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findBetweenDates($datedebut,$datefin){
+        return $this->createQueryBuilder("s")
+            ->andWhere("s.dateDebut >= :date1 AND s.dateDebut <= :date2")
+            ->setParameter("date1", $datedebut)
+            ->setParameter("date2", date('Y-m-d', strtotime($datefin." + 1 days")))
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Sortie[] Returns an array of Sortie objects
     //  */

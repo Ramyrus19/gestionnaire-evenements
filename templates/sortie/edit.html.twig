@@ -31,7 +31,6 @@
               {{ form_row(form.duree) }}
               {{ form_row(form.infos) }}
               {{ form_widget(form.etat,  { 'attr' : { 'style':'display:none'} }) }}
-
              </div>
             <div class="col">
             
@@ -64,12 +63,39 @@ let bdd_lieux=[ // id, nom, rue, latitude, longitude, ville_id, ville_cp
 {% endfor %}
 0],
 
+start_values=[],
+
+hasmodified=(force)=>{
+    if(force){ // init values
+        start_values["sortie_nom"] = _id("sortie_nom").value;
+        start_values["sortie_dateDebut"] = _id("sortie_dateDebut").value;
+        start_values["sortie_dateCloture"] = _id("sortie_dateCloture").value;
+        start_values["sortie_nbPlaces"] = _id("sortie_nbPlaces").value;
+        start_values["sortie_duree"] = _id("sortie_duree").value;
+        start_values["sortie_infos"] = _id("sortie_infos").value;
+        start_values["sortie_etat"] = _id("sortie_etat").value;
+        start_values["select_ville"] = _id("select_ville").value;
+        start_values["sortie_lieu"] = _id("sortie_lieu").value;
+    }
+    return start_values["sortie_nom"] != _id("sortie_nom").value ||
+    start_values["sortie_dateDebut"] != _id("sortie_dateDebut").value ||
+    start_values["sortie_dateCloture"] != _id("sortie_dateCloture").value ||
+    start_values["sortie_nbPlaces"] != _id("sortie_nbPlaces").value ||
+    start_values["sortie_duree"] != _id("sortie_duree").value ||
+    start_values["sortie_infos"] != _id("sortie_infos").value ||
+    start_values["sortie_etat"] != _id("sortie_etat").value ||
+    start_values["select_ville"] != _id("select_ville").value ||
+    start_values["sortie_lieu"] != _id("sortie_lieu").value
+    ;
+},
+
 _id=(vv)=>{
     return document.getElementById(vv);
 },
 
 init=()=>{
     ch_ville(_id("select_ville").firstElementChild.value);
+    hasmodified(1);
 },
 
 ch_ville=(id_ville)=>{
@@ -200,12 +226,11 @@ window.addEventListener("load",init,false);
 
          <button class="btn" onclick="_id('sortie_etat').value='2'">{{ button_label|default('Publier') }}</button>
 
-         <button class="btn" onclick="confirm('Quitter?')?document.location='{{ path('sortie_index') }}':0">{{ button_label|default('Annuler') }}</button>
-
+         <input type="button" class="btn" onclick="document.location='{{ path('sortie_annuler', {'id': sortie.id}) }}'" value="{{ button_label|default('Supprimer') }}">
          
+         <input type="button" class="btn" onclick="(!hasmodified(0))||confirm('Quitter?')?document.location='{{ path('sortie_index') }}':0" value="{{ button_label|default('Quitter') }}">
+
     {{ form_end(form) }}
-<!--<button class="btn" onclick="confirm('Supprimer cette sortie?')?document.location=' path('sortie_supprimer', 'id': sortie.id) ':0"> button_label|default('Supprimer') </button>-->
-{{ include('sortie/_delete_form.html.twig') }}
     </div>
 
 {% endblock %}
