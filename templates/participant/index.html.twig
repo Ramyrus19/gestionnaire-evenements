@@ -11,6 +11,7 @@
         {% endfor %}
     {% endfor %}
     <h1>Liste des utilisateurs</h1>
+
     <table id="datagrid" class="table striped table-border mt-4"
            data-role="table"
            data-rows="5"
@@ -49,7 +50,6 @@
                 <td>
                     <a class="button info" title="Afficher utilisateur" href="{{ path('participant_show', {'id': participant.id}) }}"><span class="mif-eye mif-2x"></span></a>
                     <a class="button warning" title="Modifier utilisateur" href="{{ path('participant_edit', {'id': participant.id}) }}"><span class="mif-pencil mif-2x"></span></a>
-                    {{ include('participant/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
@@ -59,23 +59,28 @@
         {% endfor %}
         </tbody>
     </table>
+    <!-- Actions -->
     <a class="button success" href="{{ path('participant_new') }}" title="Créer utilisateur"><span class="mif-user-plus mif-2x"></span></a>
-    <button class="button alert" onclick="changeStatus()" title="Désactiver utilisateur"><span class="mif-cancel mif-2x"></span></button>
-    <button class="button info" onclick="changeStatus()" title="Activer utilisateur"><span class="mif-plus mif-2x"></span></button>
+    <button class="button alert" onclick="deleteUsers()" title="Supprimer utilisateurs"><span class="mif-user-minus mif-2x"></span></button>
+    <button class="button warning" onclick="disableUsers()" title="Désactiver utilisateurs"><span class="mif-cancel mif-2x"></span></button>
+    <button class="button info" onclick="enableUsers()" title="Activer utilisateurs"><span class="mif-plus mif-2x"></span></button>
+
+    <button class="button primary"
+            onclick="Metro.dialog.open('#importCsv')">Importer CSV</button>
+
+    <!-- Dialog box with import form -->
     <div class="dialog" data-role="dialog" data-close-button="true" id="importCsv">
         <div class="dialog-title">Importer à partir d'un fichier CSV</div>
         <div class="dialog-content">
             {{ form_start(import_form, {'attr': {'id': 'import-form'}}) }}
-                <div id="import-error" style="color: red"></div>
-                {{ form_row(import_form.csvfile) }}
+            <div id="import-error" style="color: red"></div>
+            {{ form_row(import_form.csvfile) }}
         </div>
         <div class="dialog-actions">
             <button class="button success" title="Importer des utilisateurs">Importer</button>
             {{ form_end(import_form) }}
         </div>
     </div>
-    <button class="button primary"
-            onclick="Metro.dialog.open('#importCsv')">Importer CSV</button>
 {% endblock %}
 
 {% block javascripts %}
@@ -93,14 +98,22 @@
             }
         });
 
-        function changeStatus(){
+        function enableUsers(){
+            changeStatus('enable');
+        }
+        function disableUsers(){
+            changeStatus('disable');
+        }
+        function deleteUsers(){
+            changeStatus('delete');
+        }
+
+        function changeStatus(status){
             let tableData = $('#datagrid').data('table').getSelectedItems();
             let users = {};
             for (let i = 0; i < tableData.length; i++){
-                let status = tableData[i][6] === 'Oui';
                 users[i] = {
-                    id: tableData[i][0],
-                    status: status
+                    id: tableData[i][0]
                 }
             }
 
@@ -109,12 +122,14 @@
                 if (this.readyState === 4 && this.status === 200) {
                     //TODO: reload the table component and not the full page
                     document.location.reload();
-                    // $('#datagrid').data('table').reload(true);
+                    // let table = Metro.getPlugin('#datagrid', 'table');
+                    // // table.clear();
                 }
             };
-            xhttp.open("POST", "{{ path('participant_status') }}", true);
+            let path = "{{ path('participant_status', {'status': 0}) }}";
+            let url = path.replace("0", status);
+            xhttp.open("POST", url, true);
             xhttp.send(JSON.stringify(users));
-
         }
 
     </script>

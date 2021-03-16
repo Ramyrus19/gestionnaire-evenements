@@ -186,24 +186,27 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/status", name="participant_status", methods={"POST"})
+     * @Route("/{status}", name="participant_status", methods={"POST"})
      */
-    public function userDisable(Request $request){
-        $em = $this->getDoctrine()->getManager();
-
+    public function userChangeStatus(Request $request, EntityManagerInterface $entityManager, $status): JsonResponse
+    {
         $data = json_decode($request->getContent());
+
         foreach ($data as $d){
-            $user = $em->getRepository(Participant::class)->find($d->id);
-            if ($d->status == true){
-                $user->setActif(false);
-            }else{
+            $user = $entityManager->getRepository(Participant::class)->find($d->id);
+            if ($status == 'enable'){
                 $user->setActif(true);
+            }elseif ($status == 'disable'){
+                $user->setActif(false);
+            }elseif ($status == 'delete'){
+                $entityManager->remove($user);
+                $entityManager->flush();
             }
-            $this->getDoctrine()->getManager()->persist($user);
+            $entityManager->persist($user);
         }
 
-        $users = $em->getRepository(Participant::class)->findAll();
-        $em->flush();
+        $users = $entityManager->getRepository(Participant::class)->findAll();
+        $entityManager->flush();
 
         return new JsonResponse(json_encode($users));
     }
