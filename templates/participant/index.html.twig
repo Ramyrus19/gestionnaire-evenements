@@ -25,7 +25,7 @@
     >
         <thead>
             <tr>
-                <th>Id</th>
+{#                <th>Id</th>#}
                 <th data-sortable="true" data-sort-dir="asc">Pseudo</th>
                 <th data-sortable="true" data-sort-dir="asc">Nom</th>
                 <th data-sortable="true" data-sort-dir="asc">Prénom</th>
@@ -39,7 +39,7 @@
         <tbody>
         {% for participant in participants %}
             <tr>
-                <td>{{ participant.id }}</td>
+{#                <td>{{ participant.id }}</td>#}
                 <td>{{ participant.pseudo }}</td>
                 <td>{{ participant.nom }}</td>
                 <td>{{ participant.prenom }}</td>
@@ -113,7 +113,7 @@
             let users = {};
             for (let i = 0; i < tableData.length; i++){
                 users[i] = {
-                    id: tableData[i][0]
+                    pseudo: tableData[i][0]
                 }
             }
 

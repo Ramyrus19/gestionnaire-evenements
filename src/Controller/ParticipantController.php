@@ -193,22 +193,21 @@ class ParticipantController extends AbstractController
         $data = json_decode($request->getContent());
 
         foreach ($data as $d){
-            $user = $entityManager->getRepository(Participant::class)->find($d->id);
+            $user = $entityManager->getRepository(Participant::class)->findOneBy(['pseudo' => $d->pseudo]);
             if ($status == 'enable'){
                 $user->setActif(true);
             }elseif ($status == 'disable'){
                 $user->setActif(false);
-            }elseif ($status == 'delete'){
+            }
+            $entityManager->persist($user);
+
+            if ($status == 'delete'){
                 $entityManager->remove($user);
                 $entityManager->flush();
             }
-            $entityManager->persist($user);
         }
-
-        $users = $entityManager->getRepository(Participant::class)->findAll();
         $entityManager->flush();
-
-        return new JsonResponse(json_encode($users));
+        return new JsonResponse();
     }
 
 }
