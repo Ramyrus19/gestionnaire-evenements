@@ -42,7 +42,7 @@
         {{ form_row(form.mail) }}
     </div>
 </div>
-    {% if is_granted('ROLE_ADMIN') and app.request.get('id') == app.user.id %}
+    {% if is_granted('ROLE_USER') and app.request.get('id') == app.user.id %}
         <div class="row mb-2">
             {{ form_label(form.urlPhoto, 'Photo de profil :', { 'label_attr': {'class': 'cell-sm-6'} }) }}
             <div class="cell-sm-6">

@@ -3,18 +3,26 @@
 namespace App\Controller;
 
 use App\Entity\Participant;
+use App\Entity\Site;
 use App\Form\ParticipantType;
 use App\Form\RegistrationFormType;
 use App\Repository\ParticipantRepository;
+use App\Service\CsvImport;
 use App\Service\FileUploader;
+use Doctrine\ORM\EntityManagerInterface;
+use League\Csv\Reader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\Validator\Constraints\File;
 
 
 /**
@@ -23,12 +31,46 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ParticipantController extends AbstractController
 {
     /**
-     * @Route("/", name="participant_index", methods={"GET"})
+     * @Route("/", name="participant_index", methods={"GET", "POST"})
      */
-    public function index(ParticipantRepository $participantRepository): Response
+    public function index(Request $request, ParticipantRepository $participantRepository, CsvImport $csvImport): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $form = $this->createFormBuilder()
+            ->add('csvfile', FileType::class, [
+                'label' => false,
+                'mapped' => false,
+                'required' => true,
+                'attr' => [
+                    'accept'=> ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                ],
+                'constraints' => [
+                    new File([
+                        'maxSize' => '2048k',
+                        'mimeTypes' => [
+                            'application/vnd.ms-excel',
+                            'text/plain',
+                            'text/csv',
+                        ],
+                        'mimeTypesMessage' => 'Format invalid ! Format accepté: csv',
+                    ])
+                ],
+            ])
+            ->getForm();
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $file = $form->get('csvfile')->getData();
+            $csvImport->import($file);
+            $this->addFlash(
+                'notice',
+                'Fichier importé avec success !'
+            );
+            return $this->redirectToRoute('participant_index');
+        }
         return $this->render('participant/index.html.twig', [
             'participants' => $participantRepository->findAll(),
+            'import_form' => $form->createView()
         ]);
     }
 
@@ -37,6 +79,8 @@ class ParticipantController extends AbstractController
      */
     public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $participant = new Participant();
         $form = $this->createForm(RegistrationFormType::class, $participant);
         $form->handleRequest($request);
@@ -86,39 +130,45 @@ class ParticipantController extends AbstractController
     /**
      * @Route("/{id}/edit", name="participant_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Participant $participant, UserPasswordEncoderInterface $passwordEncoder, FileUploader $fileUploader): Response
+    public function edit(Request $request, Participant $participant, UserPasswordEncoderInterface $passwordEncoder, FileUploader $fileUploader, UserInterface $user, $id): Response
     {
-        $form = $this->createForm(ParticipantType::class, $participant, ['role' => $this->getUser()->getRoles()]);
-        $form->handleRequest($request);
+        if ($this->isGranted('ROLE_ADMIN') || $id == $user->getId()){
+            $form = $this->createForm(ParticipantType::class, $participant, ['role' => $this->getUser()->getRoles()]);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $plainPassword = $form->get('password')->getData();
-            if ($plainPassword !== null) {
-                $participant->setPassword(
-                    $passwordEncoder->encodePassword(
-                        $participant,
-                        $plainPassword
-                    )
-                );
-            }
-            //upload file by using the FileUploader service
-            if ($form->getData()->getUrlPhoto() !== null){
-                $file = $form->get('urlPhoto')->getData();
-                if ($file) {
-                    $fileName = $fileUploader->upload($file);
-                    $participant->setUrlPhoto($fileName);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $plainPassword = $form->get('password')->getData();
+                if ($plainPassword !== null) {
+                    $participant->setPassword(
+                        $passwordEncoder->encodePassword(
+                            $participant,
+                            $plainPassword
+                        )
+                    );
                 }
+                //upload file by using the FileUploader service
+                if ($form->get('urlPhoto')->getData() !== null){
+                    $file = $form->get('urlPhoto')->getData();
+                    if ($file) {
+                        $fileName = $fileUploader->upload($file);
+
+                        $participant->setUrlPhoto($fileName);
+                    }
+                }
+
+                $this->getDoctrine()->getManager()->flush();
+
+                return $this->redirectToRoute('participant_index');
             }
 
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('participant_index');
+            return $this->render('participant/edit.html.twig', [
+                'participant' => $participant,
+                'form' => $form->createView(),
+            ]);
+        }else{
+            return $this->redirect($this->generateUrl('participant_edit', array('id' => $user->getId())));
         }
 
-        return $this->render('participant/edit.html.twig', [
-            'participant' => $participant,
-            'form' => $form->createView(),
-        ]);
     }
 
     /**

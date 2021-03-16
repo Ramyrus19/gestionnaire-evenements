@@ -40,6 +40,8 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, role: ROLE_USER }
-        - { path: ^/participant/new, roles: ROLE_ADMIN }
+        - { path: ^/reset-password, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/etat/, roles: ROLE_ADMIN }
         - { path: ^/site/, roles: ROLE_ADMIN }
+        - { path: ^/ville/, roles: ROLE_ADMIN }
+        - { path: ^/, role: ROLE_USER }

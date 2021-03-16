@@ -10,6 +10,7 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
+public/uploads/
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/vscode,phpstorm,composer

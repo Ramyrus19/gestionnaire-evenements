@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Site index{% endblock %}
+{% block title %}Liste des sites{% endblock %}
 
 {% block body %}
-    <h1>Site index</h1>
+    <h1>Liste des sites</h1>
 
     <table class="table striped table-border mt-4"
            data-role="table"
@@ -28,6 +28,7 @@
                 <td>
                     <a class="button info" title="Afficher site" href="{{ path('site_show', {'id': site.id}) }}"><span class="mif-eye mif-2x"></span></a>
                     <a class="button warning" title="Modifier site" href="{{ path('site_edit', {'id': site.id}) }}"><span class="mif-pencil mif-2x"></span></a>
+                    {{ include('site/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}
@@ -38,5 +39,5 @@
         </tbody>
     </table>
 
-    <a class="button success" href="{{ path('site_new') }}" title="Créer utilisateur"><span class="mif-plus mif-2x"></span></a>
+    <a class="button success" href="{{ path('site_new') }}" title="Créer site"><span class="mif-plus mif-2x"></span></a>
 {% endblock %}
