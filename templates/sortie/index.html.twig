@@ -3,12 +3,15 @@
 {% block title %}Sortie index{% endblock %}
 
 {% block body %}
-    <h1>Sortie index</h1>
+<div class="h-vh-100">
+    <h1>Mes sortie :</h1>
 
     {% for message in app.flashes('notice') %}
         <div class="flash-notice">{{ message }}</div>
     {% endfor %}
 
+<!-- #filtres -->
+<div class="d-none d-block-md">
     <h5>Filtrer les sorties</h5>
 
     <div>
@@ -34,19 +37,24 @@
     <div>
     Date du jour : {{ "now"|date("Y-m-d") }}<br>
     Participant : {{ app.user.userName }}<br>
-    <input type="submit" value="rechercher"></div>
+    <input type="submit" value="rechercher">
+    </div>
     </form>
     </div>
 
-    <table id="datagrid" class="table striped table-border mt-4"
-    data-role="table"
-           data-rows="5"
-           data-rows-steps="5, 10"
-           data-show-activity="false"
-           data-rownum="true"
-           data-check="true"
-           data-check-style="2"
-           data-table-info-title="Listes des Sorties">
+</div>
+<!-- fin filtres -->
+
+    <table id="datagrid" class="table striped table-border mt-4 not-md-hidden-osef-columns sm-show-osef-columns"
+        data-role="table"
+        data-rows="5"
+        data-rows-steps="5, 10"
+        data-show-activity="false"
+        data-rownum="true"
+        data-check="true"
+        data-check-style="2"
+        data-cls-table-top="d-none d-block-md"
+        data-table-info-title="Listes des Sorties">
         <thead>
             <tr>
                 <th>Nom de la sortie</th>
@@ -57,12 +65,20 @@
                 <th>Inscrit</th>
                 <th  data-sortable="true" data-sort-dir="asc">Organisateur</th>
                 <th>Actions</th>
+                <th>Lieu</th>
             </tr>
         </thead>
         <tbody>
         {% for sortie in sorties %}
             <tr>
-                <td>{{ sortie.nom }}</td>
+                <td>
+                    {% if date(sortie.dateDebut)|date_modify("+1 month") > date() %}
+                        {# lien part 2/2 #}
+                        <a class="button info sm-show-osef-columns" title="Afficher sortie" href="{{ path('sortie_show', {'id': sortie.id}) }}">{{ sortie.nom }}</a>
+                    {% else %}
+                        <span class="sm-show-osef-columns">{{ sortie.nom }}</span>
+                    {% endif %}
+                    <span class="d-none d-block-md">{{ sortie.nom }}</span></td>
                 <td>{{ sortie.dateDebut ? sortie.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ sortie.dateCloture ? sortie.dateCloture|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ sortie.participants | length}} / {{ sortie.nbPlaces }}</td>
@@ -83,7 +99,10 @@
                     </a>
                 </td>
                 <td>
-                    <a class="button info" title="Afficher sortie" href="{{ path('sortie_show', {'id': sortie.id}) }}"><span class="mif-eye mif-2x"></span></a>
+                    {% if date(sortie.dateDebut)|date_modify("+1 month") > date() %}
+                        {# lien part 2/2 #}
+                        <a class="button info" title="Afficher sortie" href="{{ path('sortie_show', {'id': sortie.id}) }}"><span class="mif-eye mif-2x"></span></a>
+                    {% endif %}
                     {% if sortie.organisateur.id == app.user.id and sortie.etat.id == 1 %}
                         <a class="button warning" title="Modifier sortie" href="{{ path('sortie_edit', {'id': sortie.id}) }}"><span class="mif-pencil mif-2x"></span></a>
                     {% endif %}
@@ -93,7 +112,11 @@
                     {% if (sortie.etat.id == 2 or sortie.etat.id == 3)  and userInscrit == true %}
                         <a class="button alert" title="Désinscription" href="{{ path('sortie_inscription', {'action': 'des', 'idSortie': sortie.id,'idParticipant': app.user.id}) }}"><span class="mif-user-minus mif-2x"></span></a>
                     {% endif %}
+                    {% if sortie.organisateur.id == app.user.id and sortie.etat.id > 1 and sortie.etat.id < 4 and is_granted("ROLE_ADMIN") %}
+                        <a class="button alert" title="Supprimer sortie" href="{{ path('sortie_annuler', {'id': sortie.id}) }}"><span class="mif-cancel mif-2x"></span></a>
+                    {% endif %}
                 </td>
+                <td>{{ sortie.lieu.ville.nom }}</td>
 
             </tr>
         {% else %}
@@ -105,4 +128,5 @@
     </table>
 
     <a class="button success" href="{{ path('sortie_new') }}" title="Créer une nouvelle Sortie"><span class="mif-plus"></span></a>
+</div>
 {% endblock %}

@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Sortie;
-use App\Entity\Etat;
 use App\Entity\Participant;
 use App\Form\SortieType;
 use App\Repository\ParticipantRepository;
@@ -88,7 +87,8 @@ class SortieController extends AbstractController
                 return $this->redirectToRoute('sortie_index');
             }
         }else{
-            // TODO dsl vous n'êtes pas l'organisateur.
+            $this->addFlash('notice','Vous n\'avez pas les droits pour modifier.');
+            return $this->redirectToRoute('sortie_index');
         };
 
         $villes = $repo2->findAll();
@@ -138,8 +138,6 @@ class SortieController extends AbstractController
      */
     public function inscription(Request $request, $action, $idSortie, $idParticipant, EntityManagerInterface $em): Response
     {
-        //idée ajouter un statut dans le chemin genre "ins" et "dés"
-        //si action == inscription => incrire elseif desinscription desinscrire
         $sortie = $em->getRepository(Sortie::class)->find($idSortie);
         $participant = $em->getRepository(Participant::class)->find($idParticipant);
 
