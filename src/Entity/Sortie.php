@@ -34,6 +34,11 @@ class Sortie
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1440,
+     *      notInRangeMessage = "La durée maximale d'un évènement est {{ max }} minutes (24 h)",
+     * )
      */
     private $duree;
 
@@ -44,11 +49,17 @@ class Sortie
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 5000,
+     *      notInRangeMessage = "Maximum {{ max }} places",
+     * )
      */
     private $nbPlaces;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
+     * @Assert\Length(max=500, maxMessage="Description trop longue. Nombre maximum de caractères: {{ limit }}")
      */
     private $infos;
 
