@@ -25,6 +25,7 @@ class Participant implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message="Veuillez reinseigner un pseudo")
+     * @Assert\Length(max=180, maxMessage="Pseudo trop long. Nombre maximum de caractères: {{ limit }}")
      */
     private $pseudo;
 
@@ -37,18 +38,21 @@ class Participant implements UserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\NotBlank(message="Veuillez reinseigner un mot de passe")
+     *
      */
     private $password;
     
     /**
      * @ORM\Column(type="string", length=30)
      * @Assert\NotBlank(message="Veuillez reinseigner un nom")
+     * @Assert\Length(max=30, maxMessage="Nom trop long. Nombre maximum de caractères: {{ limit }}")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=30)
      * @Assert\NotBlank(message="Veuillez reinseigner un prénom")
+     * @Assert\Length(max=30, maxMessage="Prénom trop long. Nombre maximum de caractères: {{ limit }}")
      */
     private $prenom;
 
@@ -56,9 +60,10 @@ class Participant implements UserInterface
      * @ORM\Column(type="string", length=15, nullable=true)
      * @Assert\NotBlank
      * @Assert\Regex(
-     *     pattern="/^\(0\)[0-9]*$/",
-     *     message="Veuillez reinseigner numéro de téléphone valid"
+     *     pattern="/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/",
+     *     message="Veuillez reinseigner un numéro de téléphone valid"
      * )
+     * @Assert\Length(max=15, maxMessage="Numéro de téléphone trop long. Nombre maximum de caractères: {{ limit }}")
      */
     private $telephone;
 
@@ -67,6 +72,7 @@ class Participant implements UserInterface
      * @Assert\Email(
      *     message = "L'adresse mail '{{ value }}' n'est pas une adresse mail valide."
      * )
+     * @Assert\Length(max=50, maxMessage="Adresse mail trop longue. Nombre maximum de caractères: {{ limit }}")
      */
     private $mail;
     
@@ -82,6 +88,11 @@ class Participant implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=250, nullable=true)
+     * @Assert\File(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"image/jpeg", "image/jpg", "image/png"},
+     *     mimeTypesMessage = "Format image invalid ! Formats acceptés: png, jpg, jpeg"
+     * )
      */
     private $urlPhoto;
 
@@ -92,7 +103,7 @@ class Participant implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Site::class)
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $site;
 

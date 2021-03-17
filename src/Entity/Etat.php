@@ -20,7 +20,8 @@ class Etat
 
     /**
      * @ORM\Column(type="string", length=30)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Veuillez reinseigner une libellé")
+     * @Assert\Length(max=30, maxMessage="Libellé trop longue. Nombre maximum de caractères: {{ limit }}")
      */
     private $libelle;
 

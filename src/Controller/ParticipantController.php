@@ -39,7 +39,7 @@ class ParticipantController extends AbstractController
      */
     public function index(Request $request, ParticipantRepository $participantRepository, CsvImport $csvImport): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $form = $this->createFormBuilder()
             ->add('csvfile', FileType::class, [
                 'label' => false,

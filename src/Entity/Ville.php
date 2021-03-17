@@ -22,14 +22,16 @@ class Ville
 
     /**
      * @ORM\Column(type="string", length=30)
-     *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Veuillez reinseigner un nom")
+     * @Assert\Length(max=30, maxMessage="Nom trop long. Nombre maximum de caractères: {{ limit }}")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=10)
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="Veuillez reinseigner un code postal")
+     * @Assert\Length(max=10, maxMessage="Code postal trop long. Nombre maximum de caractères: {{ limit }}")
+     * @Assert\Positive(message="Veuillez reinseigner un code postal valid")
      */
     private $cp;
 
