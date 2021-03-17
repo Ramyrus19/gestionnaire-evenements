@@ -61,11 +61,19 @@ class ParticipantController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->get('csvfile')->getData();
-            $csvImport->import($file);
-            $this->addFlash(
-                'notice',
-                'Fichier importé avec success !'
-            );
+            $response = $csvImport->import($file);
+            if ($response->getContent() === 'success'){
+                $this->addFlash(
+                    'success',
+                    'Fichier importé avec success !'
+                );
+            }else{
+                $this->addFlash(
+                    'duplicate',
+                    'Erreur import ! Doublons !'
+                );
+            }
+
             return $this->redirectToRoute('participant_index');
         }
         return $this->render('participant/index.html.twig', [
@@ -186,26 +194,28 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/status", name="participant_status", methods={"POST"})
+     * @Route("/{status}", name="participant_status", methods={"POST"})
      */
-    public function userDisable(Request $request){
-        $em = $this->getDoctrine()->getManager();
-
+    public function userChangeStatus(Request $request, EntityManagerInterface $entityManager, $status): JsonResponse
+    {
         $data = json_decode($request->getContent());
+
         foreach ($data as $d){
-            $user = $em->getRepository(Participant::class)->find($d->id);
-            if ($d->status == true){
-                $user->setActif(false);
-            }else{
+            $user = $entityManager->getRepository(Participant::class)->findOneBy(['pseudo' => $d->pseudo]);
+            if ($status == 'enable'){
                 $user->setActif(true);
+            }elseif ($status == 'disable'){
+                $user->setActif(false);
             }
-            $this->getDoctrine()->getManager()->persist($user);
+            $entityManager->persist($user);
+
+            if ($status == 'delete'){
+                $entityManager->remove($user);
+                $entityManager->flush();
+            }
         }
-
-        $users = $em->getRepository(Participant::class)->findAll();
-        $em->flush();
-
-        return new JsonResponse(json_encode($users));
+        $entityManager->flush();
+        return new JsonResponse();
     }
 
 }

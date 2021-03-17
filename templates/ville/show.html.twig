@@ -4,25 +4,25 @@
 
 {% block body %}
     <div class="row">
-        <div class="cell-4 offset-4">
+        <div class="cell-lg-4 offset-lg-4 cell-md-6 offset-md-4">
             <div class="p-4">
                 <h4>Ville</h4>
                 <form>
                     <div class="row mb-2">
-                        <label class="cell-sm-6">Nom :</label>
-                        <div class="cell-sm-6">
+                        <label class="cell-md-6">Nom :</label>
+                        <div class="cell-md-6">
                             <p>{{ ville.nom }}</p>
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label class="cell-sm-6">Code postal :</label>
-                        <div class="cell-sm-6">
+                        <label class="cell-md-6">Code postal :</label>
+                        <div class="cell-md-6">
                             <p>{{ ville.cp }}</p>
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label class="cell-sm-6">Lieux :</label>
-                        <div class="cell-sm-6">
+                        <label class="cell-md-6">Lieux :</label>
+                        <div class="cell-md-6">
                             {% for lieu in lieux %}
                                 <p>{{ lieu.nom }}</p>
                             {% endfor %}
