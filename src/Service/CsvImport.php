@@ -28,40 +28,48 @@ class CsvImport
     }
 
     public function import($file){
+        $response = "";
         $fileName = $this->fileUploader->upload($file);
         $reader = Reader::createFromPath($this->getTargetDirectory().'/'.$fileName);
 
         $results = $reader->getRecords(['pseudo', 'nom', 'prenom', 'telephone', 'mail','admin','actif','site','plainPassword']);
 
         foreach ($results as $row) {
-            $site = new Site();
-            $site->setNom($row['site']);
-            $this->em->persist($site);
-            $user = new Participant();
-            $user->setPassword(
-                $this->passwordEncoder->encodePassword(
-                    $user,
-                    $row['plainPassword']
-                )
-            );
+            $existentUser = $this->em->getRepository(Participant::class)->findOneBy(['pseudo' => $row['pseudo']]);
 
-            $user->setPseudo($row['pseudo'])
-                ->setNom($row['nom'])
-                ->setPrenom($row['prenom'])
-                ->setTelephone($row['telephone'])
-                ->setMail($row['mail'])
-                ->setAdmin(filter_var($row['admin'], FILTER_VALIDATE_BOOLEAN))
-                ->setActif(filter_var($row['actif'], FILTER_VALIDATE_BOOLEAN))
-                ->setSite($site)
-            ;
+            if (null == $existentUser){
+                $site = new Site();
+                $site->setNom($row['site']);
+                $this->em->persist($site);
 
-            $this->em->persist($user);
+                $user = new Participant();
+                $user->setPassword(
+                    $this->passwordEncoder->encodePassword(
+                        $user,
+                        $row['plainPassword']
+                    )
+                );
 
+                $user->setPseudo($row['pseudo'])
+                    ->setNom($row['nom'])
+                    ->setPrenom($row['prenom'])
+                    ->setTelephone($row['telephone'])
+                    ->setMail($row['mail'])
+                    ->setAdmin(filter_var($row['admin'], FILTER_VALIDATE_BOOLEAN))
+                    ->setActif(filter_var($row['actif'], FILTER_VALIDATE_BOOLEAN))
+                    ->setSite($site)
+                ;
+                $this->em->persist($user);
+
+                $response = "success";
+            }else{
+                $response = "duplicate";
+            }
         }
 
         $this->em->flush();
 
-        return new Response("success");
+        return new Response($response);
     }
 
     public function getTargetDirectory()

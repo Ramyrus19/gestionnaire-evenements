@@ -30,7 +30,6 @@
                 <td>
                     <a class="button info" title="Afficher ville" href="{{ path('ville_show', {'id': ville.id}) }}"><span class="mif-eye mif-2x"></span></a>
                     <a class="button warning" title="Modifier ville" href="{{ path('ville_edit', {'id': ville.id}) }}"><span class="mif-pencil mif-2x"></span></a>
-                    {{ include('ville/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% else %}

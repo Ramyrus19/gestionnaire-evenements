@@ -16,10 +16,16 @@ class VilleType extends AbstractType
     {
         $builder
             ->add('nom', TextType::class, [
-                'label' => false
+                'label' => false,
+                'attr' => [
+                    'data-role' => 'input',
+                ]
             ])
             ->add('cp', TextType::class, [
-                'label' => false
+                'label' => false,
+                'attr' => [
+                    'data-role' => 'input',
+                ]
             ])
         ;
     }

@@ -23,19 +23,35 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('pseudo', TextType::class, [
-                'label' => false
+                'label' => false,
+                'attr' => [
+                    'data-role' => 'input',
+                ]
             ])
             ->add('nom', TextType::class, [
-                'label' => false
+                'label' => false,
+                'attr' => [
+                    'data-role' => 'input',
+                ]
             ])
             ->add('prenom', TextType::class, [
-                'label' => false
+                'label' => false,
+                'attr' => [
+                    'data-role' => 'input',
+                ]
             ])
             ->add('telephone', TelType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'data-role' => 'input',
+                ]
             ])
             ->add('mail', EmailType::class, [
-                'label' => false
+                'label' => false,
+                'attr' => [
+                    'data-role' => 'input',
+                ]
             ])
             ->add('admin', CheckboxType::class, [
                 'label'    => false,
@@ -64,6 +80,9 @@ class RegistrationFormType extends AbstractType
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
                 'label' => false,
+                'attr' => [
+                    'data-role' => 'input',
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -75,6 +94,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
