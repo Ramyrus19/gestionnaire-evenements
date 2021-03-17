@@ -48,7 +48,8 @@ class ParticipantType extends AbstractType
                 'label' => false
             ])
             ->add('telephone', TelType::class, [
-                'label' => false
+                'label' => false,
+                'required' => false
             ])
             ->add('mail', EmailType::class, [
                 'label' => false
@@ -94,6 +95,7 @@ class ParticipantType extends AbstractType
                 ->add('site', EntityType::class, [
                     'class' => Site::class,
                     'choice_label' => 'nom',
+                    'required' => false,
                     'label' => false,
                     'attr' => [
                         'data-role' => 'select',

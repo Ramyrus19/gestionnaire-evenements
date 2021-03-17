@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Repository\ParticipantRepository;
 use App\Repository\SiteRepository;
 use App\Repository\SortieRepository;
+use App\Repository\EtatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,24 +18,43 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="sortie_index", methods={"GET","POST"})
      */
-    public function index(SortieRepository $sortieRepository, ParticipantRepository $repoPart, SiteRepository $repoSite, Request $request, UserInterface $user): Response
+    public function index(SortieRepository $sortieRepository, EtatRepository $repo1, ParticipantRepository $repoPart, SiteRepository $repoSite, Request $request, UserInterface $user): Response
     {
-        /*         $sorties = $sortieRepository->findAll();
-                    foreach ($sorties as $sortie){
-                     dump($sortie->getParticipants()->getValues());
-                     }die(); */
-        $result = [];
-        $filter=$request->getContent(); //1, 2, 3, 4
-        if(
-            !$request->request->get('filter_site') && 
-            !$request->request->get('filter_nom') && 
-            !$request->request->get('filtre_datedebut') && 
-            !$request->request->get('filtre_datefin') &&
-            !$request->request->get('filter_orga') && 
-            !$request->request->get('filter_inscrit') && 
-            !$request->request->get('filter_pas_inscrit') && 
-            !$request->request->get('filter_passees') 
+        $file_time_name = "mise_a_jour_le.txt"; // simple titre de fichier
 
+        // update etat 1x/day
+        if ( !file_exists($file_time_name) || date("Y-m-d",filemtime($file_time_name)) != date("Y-m-d") ){
+            $sorties = $sortieRepository->findAll();
+            $now = new \DateTime("now");
+            $etat3 = $repo1->find(3);
+            $etat5 = $repo1->find(5);
+            foreach ($sorties as $sortie){
+                if($sortie->getDateCloture() <= $now && $sortie->getEtat()->getId() > 1 && $sortie->getEtat()->getId() < 3){
+                    $sortie->setEtat($etat3);
+                }
+                if($sortie->getDateDebut() <= $now && $sortie->getEtat()->getId() > 1 && $sortie->getEtat()->getId() < 5){
+                    $sortie->setEtat($etat5);
+                }
+            }
+            
+            if(file_exists($file_time_name)){
+                unlink($file_time_name);
+            }
+            file_put_contents($file_time_name,"");
+            
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        $result = [];
+        if(
+        !$request->request->get('filter_site') && 
+        !$request->request->get('filter_nom') && 
+        !$request->request->get('filtre_datedebut') && 
+        !$request->request->get('filtre_datefin') &&
+        !$request->request->get('filter_orga') && 
+        !$request->request->get('filter_inscrit') && 
+        !$request->request->get('filter_pas_inscrit') && 
+        !$request->request->get('filter_passees') 
         ){
 
             $result = $sortieRepository->findAll();
@@ -130,7 +150,5 @@ class MainController extends AbstractController
 
         ]);
     }
-
-    //TODO: function changement etat (doc DiagEtatSortie.pdf)
 
 }

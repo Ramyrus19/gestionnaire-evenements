@@ -226,7 +226,7 @@ window.addEventListener("load",init,false);
 
          <button class="btn" onclick="_id('sortie_etat').value='2'">{{ button_label|default('Publier') }}</button>
 
-         <input type="button" class="btn" onclick="document.location='{{ path('sortie_annuler', {'id': sortie.id}) }}'" value="{{ button_label|default('Supprimer') }}">
+         <input type="button" class="button alert" onclick="document.location='{{ path('sortie_annuler', {'id': sortie.id}) }}'" value="{{ button_label|default('Supprimer') }}">
          
          <input type="button" class="btn" onclick="(!hasmodified(0))||confirm('Quitter?')?document.location='{{ path('sortie_index') }}':0" value="{{ button_label|default('Quitter') }}">
 
