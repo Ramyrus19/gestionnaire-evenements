@@ -11,7 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
- * @UniqueEntity(fields={"pseudo", "mail"}, message="Le pseudo et l'adresse mail doivent être uniques")
+ * @UniqueEntity(fields={"pseudo"}, message="Il existe déjà un compte avec ce pseudo")
+ * @UniqueEntity(fields={"mail"}, message="Il existe déjà un compte avec cette adresse mail")
  */
 class Participant implements UserInterface
 {
@@ -37,7 +38,6 @@ class Participant implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Veuillez reinseigner un mot de passe")
      *
      */
     private $password;
