@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
- * @UniqueEntity(fields={"pseudo"}, message="There is already an account with this pseudo")
+ * @UniqueEntity(fields={"pseudo", "mail"}, message="Le pseudo et l'adresse mail doivent être uniques")
  */
 class Participant implements UserInterface
 {

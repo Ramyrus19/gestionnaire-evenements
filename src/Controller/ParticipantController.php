@@ -159,8 +159,9 @@ class ParticipantController extends AbstractController
                             )
                         );
                     }
+
                     //upload file by using the FileUploader service
-                    if ($form->get('urlPhoto')->getData() !== null){
+                    if ($form->getData()->getUrlPhoto() != null){
                         $file = $form->get('urlPhoto')->getData();
                         if ($file) {
                             $fileName = $fileUploader->upload($file);
@@ -170,16 +171,6 @@ class ParticipantController extends AbstractController
                     }
 
                     $this->getDoctrine()->getManager()->persist($participant);
-
-                    $oldToken = $tokenStorage->getToken();
-                    // create the authentication token
-                    $token = new PostAuthenticationGuardToken(
-                        $participant,
-                        $oldToken->getProviderKey(),
-                        $oldToken->getRoleNames()
-                    );
-                    // update the token in the security context
-                    $tokenStorage->setToken($token);
 
                     $this->getDoctrine()->getManager()->flush();
 
