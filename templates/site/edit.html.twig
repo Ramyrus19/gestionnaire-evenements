@@ -5,6 +5,11 @@
 {% block body %}
     <div class="cell-lg-4 offset-lg-4 cell-md-9 offset-md-2">
         <div class="p-4">
+            {% for message in app.flashes('error') %}
+                <div class="bg-red fg-white padding10 text-shadow">
+                    &nbsp;{{ message }}
+                </div>
+            {% endfor %}
             <h4>Modifier site</h4>
 
             {{ include('site/_form.html.twig', {'button_label': 'Update'}) }}
@@ -14,7 +19,7 @@
                     {{ form_end(form) }}
 
                     <a class="button secondary" href="{{ path('site_index') }}"><span class="mif-arrow-left mif-2x"></span>&nbsp;&nbsp;Retour à la liste</a>
-{#                    {{ include('site/_delete_form.html.twig') }}#}
+                    {{ include('site/_delete_form.html.twig') }}
 
                 </div>
             </div>
