@@ -28,7 +28,6 @@
     >
         <thead>
             <tr>
-{#                <th>Id</th>#}
                 <th data-sortable="true" data-sort-dir="asc">Pseudo</th>
                 <th data-sortable="true" data-sort-dir="asc">Nom</th>
                 <th data-sortable="true" data-sort-dir="asc">Prénom</th>
@@ -42,7 +41,6 @@
         <tbody>
         {% for participant in participants %}
             <tr>
-{#                <td>{{ participant.id }}</td>#}
                 <td>{{ participant.pseudo }}</td>
                 <td>{{ participant.nom }}</td>
                 <td>{{ participant.prenom }}</td>
