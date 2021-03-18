@@ -76,7 +76,7 @@ class ParticipantType extends AbstractType
                 $builder
                     ->add('urlPhoto', FileType::class, [
                         'label' => false,
-                        'mapped' => false,
+                        'data_class' => null,
                         'required' => false,
                         'constraints' => [
                             new File([

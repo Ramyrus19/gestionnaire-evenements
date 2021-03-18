@@ -144,8 +144,9 @@ class ParticipantController extends AbstractController
      */
     public function edit(TokenStorageInterface $tokenStorage, Request $request, Participant $participant, UserPasswordEncoderInterface $passwordEncoder, FileUploader $fileUploader, UserInterface $user, $id): Response
     {
-        if ($this->isGranted('ROLE_ADMIN') || $id == $user->getId()){
+        if ($this->isGranted('ROLE_USER') || $id == $user->getId()){
             $form = $this->createForm(ParticipantType::class, $participant, ['role' => $this->getUser()->getRoles()]);
+
             $form->handleRequest($request);
 
             if ($form->isSubmitted()) {
@@ -159,8 +160,8 @@ class ParticipantController extends AbstractController
                             )
                         );
                     }
-
                     //upload file by using the FileUploader service
+//                    dump($form->getData());die;
                     if ($form->getData()->getUrlPhoto() != null){
                         $file = $form->get('urlPhoto')->getData();
                         if ($file) {
