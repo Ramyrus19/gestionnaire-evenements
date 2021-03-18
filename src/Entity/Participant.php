@@ -88,11 +88,6 @@ class Participant implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=250, nullable=true)
-     * @Assert\File(
-     *     maxSize = "2048k",
-     *     mimeTypes = {"image/jpeg", "image/jpg", "image/png"},
-     *     mimeTypesMessage = "Format image invalid ! Formats acceptés: png, jpg, jpeg"
-     * )
      */
     private $urlPhoto;
 
