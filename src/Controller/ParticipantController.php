@@ -146,6 +146,7 @@ class ParticipantController extends AbstractController
     {
         if ($this->isGranted('ROLE_USER') || $id == $user->getId()){
             $form = $this->createForm(ParticipantType::class, $participant, ['role' => $this->getUser()->getRoles()]);
+            $oldParticipantPhoto = $participant->getUrlPhoto();
 
             $form->handleRequest($request);
 
@@ -160,8 +161,7 @@ class ParticipantController extends AbstractController
                             )
                         );
                     }
-                    //upload file by using the FileUploader service
-//                    dump($form->getData());die;
+
                     if ($form->getData()->getUrlPhoto() != null){
                         $file = $form->get('urlPhoto')->getData();
                         if ($file) {
@@ -170,8 +170,7 @@ class ParticipantController extends AbstractController
                             $participant->setUrlPhoto($fileName);
                         }
                     }else{
-                        $this->getDoctrine()->getManager()->refresh($participant);
-                        $participant->setUrlPhoto($participant->getUrlPhoto());
+                        $participant->setUrlPhoto($oldParticipantPhoto);
                     }
 
                     $this->getDoctrine()->getManager()->persist($participant);
