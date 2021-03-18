@@ -19,8 +19,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Guard\Token\PostAuthenticationGuardToken;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Validator\Constraints\File;
 
@@ -138,41 +142,54 @@ class ParticipantController extends AbstractController
     /**
      * @Route("/{id}/edit", name="participant_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Participant $participant, UserPasswordEncoderInterface $passwordEncoder, FileUploader $fileUploader, UserInterface $user, $id): Response
+    public function edit(TokenStorageInterface $tokenStorage, Request $request, Participant $participant, UserPasswordEncoderInterface $passwordEncoder, FileUploader $fileUploader, UserInterface $user, $id): Response
     {
         if ($this->isGranted('ROLE_ADMIN') || $id == $user->getId()){
             $form = $this->createForm(ParticipantType::class, $participant, ['role' => $this->getUser()->getRoles()]);
             $form->handleRequest($request);
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                $plainPassword = $form->get('password')->getData();
-                if ($plainPassword !== null) {
-                    $participant->setPassword(
-                        $passwordEncoder->encodePassword(
-                            $participant,
-                            $plainPassword
-                        )
-                    );
-                }
-                //upload file by using the FileUploader service
-                if ($form->get('urlPhoto')->getData() !== null){
-                    $file = $form->get('urlPhoto')->getData();
-                    if ($file) {
-                        $fileName = $fileUploader->upload($file);
-
-                        $participant->setUrlPhoto($fileName);
+            if ($form->isSubmitted()) {
+                if ($form->isValid()){
+                    $plainPassword = $form->get('password')->getData();
+                    if ($plainPassword !== null) {
+                        $participant->setPassword(
+                            $passwordEncoder->encodePassword(
+                                $participant,
+                                $plainPassword
+                            )
+                        );
                     }
+
+                    //upload file by using the FileUploader service
+                    if ($form->getData()->getUrlPhoto() != null){
+                        $file = $form->get('urlPhoto')->getData();
+                        if ($file) {
+                            $fileName = $fileUploader->upload($file);
+
+                            $participant->setUrlPhoto($fileName);
+                        }
+                    }
+
+                    $this->getDoctrine()->getManager()->persist($participant);
+
+                    $this->getDoctrine()->getManager()->flush();
+
+                    if ($this->isGranted('ROLE_ADMIN')){
+                        return $this->redirectToRoute('participant_index');
+                    }else{
+                        return $this->redirectToRoute('sortie_index');
+                    }
+                }else{
+                    $this->getDoctrine()->getManager()->refresh($participant);
                 }
 
-                $this->getDoctrine()->getManager()->flush();
-
-                return $this->redirectToRoute('participant_index');
             }
 
             return $this->render('participant/edit.html.twig', [
                 'participant' => $participant,
                 'form' => $form->createView(),
             ]);
+
         }else{
             return $this->redirect($this->generateUrl('participant_edit', array('id' => $user->getId())));
         }

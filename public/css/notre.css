@@ -10,7 +10,7 @@ a.sm-show-osef-columns{
     display:none
 }
 
-@media screen and (max-width:768px){
+@media screen and (max-width:767px){
 
     span.not-md-hidden-osef-columns{
         display:none
@@ -62,6 +62,10 @@ a.sm-show-osef-columns{
 
     .sm-show-osef-columns th:nth-child(11), .sm-show-osef-columns td:nth-child(11){
         display:block
+    }
+
+    .app-bar-expand .app-bar-menu.collapsed{
+        display: none !important;
     }
 
 }

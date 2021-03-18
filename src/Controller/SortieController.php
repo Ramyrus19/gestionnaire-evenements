@@ -116,6 +116,7 @@ class SortieController extends AbstractController
             // editeur == organisateur
             if ($form->isSubmitted() && $form->isValid()) {
                 $sortie->setEtat($repo1->find(6));
+                $sortie->getParticipants()->clear();
                 $this->getDoctrine()->getManager()->flush();
     
                 return $this->redirectToRoute('sortie_index');

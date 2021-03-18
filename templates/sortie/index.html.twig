@@ -147,7 +147,7 @@
                     {% if (sortie.etat.id == 2 or sortie.etat.id == 3)  and userInscrit == true %}
                         <a class="button alert" title="Désinscription" href="{{ path('sortie_inscription', {'action': 'des', 'idSortie': sortie.id,'idParticipant': app.user.id}) }}"><span class="mif-user-minus mif-2x"></span></a>
                     {% endif %}
-                    {% if sortie.organisateur.id == app.user.id and sortie.etat.id > 1 and sortie.etat.id < 4 and is_granted("ROLE_ADMIN") %}
+                    {% if (sortie.organisateur.id == app.user.id or is_granted("ROLE_ADMIN")) and (sortie.etat.id > 1 and sortie.etat.id < 4) %}
                         <a class="button alert" title="Supprimer sortie" href="{{ path('sortie_annuler', {'id': sortie.id}) }}"><span class="mif-cancel mif-2x"></span></a>
                     {% endif %}
                 </td>

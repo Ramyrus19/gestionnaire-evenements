@@ -7,6 +7,11 @@
 
     <div class="cell-lg-4 offset-lg-4 cell-md-9 offset-md-2">
         <div class="p-4">
+            {% for message in app.flashes('error') %}
+                <div class="bg-red fg-white padding10 text-shadow">
+                    &nbsp;{{ message }}
+                </div>
+            {% endfor %}
             <h1>Modifier Ville</h1>
             {{ include('ville/_form.html.twig', {'button_label': 'Update'}) }}
             <div class="row">
