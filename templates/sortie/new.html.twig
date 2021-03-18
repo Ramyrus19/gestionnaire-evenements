@@ -3,61 +3,6 @@
 {% block title %}Nouvelle Sortie{% endblock %}
 
 {% block body %}
-    <div class="no-visible pos-absolute container info-box d-block px-5 py-5" style="z-index:2000;background:#fff;border:1px solid #444" id="lieux_add_window">
-        <span class="button square closer" onclick="switch_visible_lieuadd(-1)"></span>
-        <h1>Ajouter un lieu</h1>
-        Nom du lieu : <input id="lieuadd_nom"><br>
-        Rue : <input id="lieuadd_rue"><br>
-        Latitude : <input id="lieuadd_latitude"><br>
-        Longitude : <input id="lieuadd_longitude"><br>
-        Ville : <label id="lieuadd_ville_txt">texte</label><br>
-        <input id="lieuadd_ville" type="hidden">
-        <p id="message_lieuadd"></p>
-        <button onclick="ajax_send_lieuadd()" id="bouton_lieuadd">Ajouter</button>
-        <button onclick="switch_visible_lieuadd(-1)">Annuler</button>
-    </div>
-
-    <h1>Creation nouvelle sortie</h1>
-    
-    <div class="container">
-    {# include('sortie/_form.html.twig') }}#}
-    {{ form_start(form) }}
-
-        <div class="row">
-            <div class="col">
-              {{ form_row(form.nom) }}
-              {{ form_row(form.dateDebut) }}
-              {{ form_row(form.dateCloture) }}
-              {{ form_row(form.nbPlaces) }}
-              {{ form_row(form.duree) }}
-              {{ form_row(form.infos) }}
-              {{ form_widget(form.etat,  { 'attr' : { 'style':'display:none'} }) }}
-
-             </div>
-            <div class="col">
-            
-            <label>Ville organisatrice</label>
-            <label>{{ ville_orga }}</label>
-
-<br>
-            <label>Ville :</label>
-            <select id="select_ville" onchange="ch_ville(this.value)">
-                {% for ville in villes %}<option value="{{ ville.id }}">{{ ville.nom }}</option>{% endfor %}
-            </select>
-
-<br>
-            <label>Lieu :</label>
-            {{ form_row(form.lieu) }}
-            <input type="button" onclick="switch_visible_lieuadd(1)" value="+">
-
-<br>
-            <label>Rue :</label>
-            <label id="la_rue"></label>
-
-<br>
-            <label>Code postal :</label>
-            <label id="le_cp"></label>
-
 <script>
 let bdd_lieux=[ // id, nom, rue, latitude, longitude, ville_id, ville_cp
 {% for lieu in lieux %}
@@ -193,14 +138,129 @@ window.addEventListener("load",init,false);
 
 </script>
 
-            </div>
-        </div>
-         <button class="btn" onclick="_id('sortie_etat').value='1'">{{ button_label|default('Enregistrer') }}</button>
-
-         <button class="btn" onclick="_id('sortie_etat').value='2'">{{ button_label|default('Publier') }}</button>
-
-         <button class="btn" onclick="confirm('Quitter?')?document.location='{{ path('sortie_index') }}':0">{{ button_label|default('Annuler') }}</button>
-    {{ form_end(form) }}
+    <div class="no-visible pos-absolute container info-box d-block px-5 py-5" style="z-index:2000;background:#fff;border:1px solid #444" id="lieux_add_window">
+        <span class="button square closer" onclick="switch_visible_lieuadd(-1)"></span>
+        <h1>Ajouter un lieu</h1>
+        Nom du lieu : <input id="lieuadd_nom"><br>
+        Rue : <input id="lieuadd_rue"><br>
+        Latitude : <input id="lieuadd_latitude"><br>
+        Longitude : <input id="lieuadd_longitude"><br>
+        Ville : <label id="lieuadd_ville_txt">texte</label><br>
+        <input id="lieuadd_ville" type="hidden">
+        <p id="message_lieuadd"></p>
+        <button onclick="ajax_send_lieuadd()" id="bouton_lieuadd">Ajouter</button>
+        <button onclick="switch_visible_lieuadd(-1)">Annuler</button>
     </div>
+
+    <h1>Creation nouvelle sortie</h1>
+    
+    <div class="container">
+    {# include('sortie/_form.html.twig') }}#}
+    {{ form_start(form) }}
+
+        <div class="row">
+            <div class="cell-6">
+
+            <div class="row mb-2">
+                <label class="cell-md-6 cell-lg-4"> {{form_label(form.nom) }}</label>
+                <div class="cell-md-6 cell-lg-8 input">
+                    {{ form_widget(form.nom) }}   
+                </div>
+            </div>
+
+             <div class="row mb-2">
+                <label class="cell-md-6 cell-lg-4"> {{form_label(form.dateDebut)}}</label>
+                <div class="cell-md-6 cell-lg-8 input">
+                    {{ form_widget(form.dateDebut) }}  
+                </div>
+            </div>
+
+             <div class="row mb-2">
+                <label class="cell-md-6 cell-lg-4"> {{form_label(form.dateCloture)}}</label>
+                <div class="cell-md-6 cell-lg-8 input">
+                    {{ form_widget(form.dateCloture) }}  
+                </div>
+            </div>
+
+             <div class="row mb-2">
+                <label class="cell-md-6 cell-lg-4"> {{form_label(form.nbPlaces)}}</label>
+                <div class="cell-md-6 cell-lg-8 input">
+                    {{ form_widget(form.nbPlaces) }}  
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="cell-md-6 cell-lg-4"> {{form_label(form.duree)}}</label>
+                <div class="cell-md-6 cell-lg-8 input">
+                    {{ form_widget(form.duree) }}  
+                </div>
+            </div>  
+
+            <div class="row mb-2">
+                <label class="cell-md-6 cell-lg-4"> {{form_label(form.infos)}}</label>
+                <div class="cell-md-6 cell-lg-8 input">
+                    {{ form_widget(form.infos) }}  
+                </div>
+            </div>
+
+            </div>
+
+            <div class="cell-6">
+
+            <div class="row mb-2">
+                <label class="cell-md-6 cell-lg-4"> Ville organisatrice :</label>
+                <div class="cell-md-6 cell-lg-8 input">
+                    {{ ville_orga }}  
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="cell-md-6 cell-lg-4"> Ville :</label>
+                <div class="cell-md-6 cell-lg-8 input">
+                <select id="select_ville" onchange="ch_ville(this.value)" data-role="select">
+                {% for ville in villes %}<option value="{{ ville.id }}">{{ ville.nom }}</option>{% endfor %}
+                </select>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="cell-md-6 cell-lg-4">Lieu :</label>
+                <div class="cell-md-6 cell-lg-8 input">
+                    {{ form_row(form.lieu) }}   
+                     <button class="button light shadowed mif-plus" onclick="switch_visible_lieuadd(1)">
+                </div>
+                
+            </div>
+            
+
+            <div class="row mb-2">
+                <label class="cell-md-6 cell-lg-4">Rue :</label>
+                <div class="cell-md-6 cell-lg-8 input">
+                     <label id="la_rue"></label>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="cell-md-6 cell-lg-4">Code postal :</label>
+                <div class="cell-md-6 cell-lg-8 input">
+                    <label id="le_cp"></label>
+                </div>
+            </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+    <div class="offset-3 cell-6 d-flex" style="justify-content:space-between">
+    <button class="button success" onclick="_id('sortie_etat').value='1'"><span class="mif-floppy-disk mif-2x"></span>&nbsp;&nbsp;Enregistrer</button>
+
+    <button class="button info " onclick="_id('sortie_etat').value='2'"><span class="mif-arrow-up mif-2x"></span>&nbsp;&nbsp;Publier</button>
+
+    <button class="button secondary" onclick="confirm('Quitter?')?document.location='{{ path('sortie_index') }}':0"><span class=" mif-bin mif-2x"></span>&nbsp;&nbsp;Annuler</button>
+    </div>
+    </div>
+    {{ form_widget(form.etat,  { 'attr' : { 'style':'display:none'} }) }}
+    {{ form_end(form) }}
 
 {% endblock %}

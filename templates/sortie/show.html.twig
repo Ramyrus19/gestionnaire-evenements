@@ -9,88 +9,90 @@
         <h4>Afficher une sortie</h4>
     </div>
 
-    <div class="cell-12 row d-flex">
-        <div class="cell-6">
-            <div class="p-4">
-                <div class="row mb-2">
-                    <label class="cell-sm-6">Nom de la sortie :</label>
-                    <div class="cell-sm-6">
-                        <p>{{ sortie.nom }}</p>
+    <div class="cell-12 d-flex p-0" style="flex-flow:row wrap">
+
+            <div class="cell-12 cell-md-6">
+
+                    <div class="row mb-2">
+                        <label class="cell-6 text-right">Nom de la sortie :</label>
+                        <div class="cell-6">
+                            <p>{{ sortie.nom }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <label class="cell-sm-6">Date et heure de la sortie :</label>
-                    <div class="cell-sm-6">
-                        <p>{{ sortie.dateDebut ? sortie.dateDebut|date('Y-m-d H:i:s') : '' }}</p>
+                    <div class="row mb-2">
+                        <label class="cell-6 text-right">Date et heure de la sortie :</label>
+                        <div class="cell-6">
+                            <p>{{ sortie.dateDebut ? sortie.dateDebut|date('Y-m-d H:i:s') : '' }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <label class="cell-sm-6">Date limite d'inscription :</label>
-                    <div class="cell-sm-6">
-                        <p>{{ sortie.dateCloture ? sortie.dateCloture|date('Y-m-d H:i:s') : '' }}</p>
+                    <div class="row mb-2">
+                        <label class="cell-6 text-right">Date limite d'inscription :</label>
+                        <div class="cell-6">
+                            <p>{{ sortie.dateCloture ? sortie.dateCloture|date('Y-m-d') : '' }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <label class="cell-sm-6">Nombre de places :</label>
-                    <div class="cell-sm-6">
-                        <p>{{ sortie.nbPlaces }}</p>
+                    <div class="row mb-2">
+                        <label class="cell-6 text-right">Nombre de places :</label>
+                        <div class="cell-6">
+                            <p>{{ sortie.nbPlaces }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <label class="cell-sm-6">Durée :</label>
-                    <div class="cell-sm-6">
-                        <p>{{ sortie.duree }} minutes</p>
+                    <div class="row mb-2">
+                        <label class="cell-6 text-right">Durée :</label>
+                        <div class="cell-6">
+                            <p>{{ sortie.duree }} minutes</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <label class="cell-sm-6">Description et infos :</label>
-                    <div class="cell-sm-6">
-                        <p>{{ sortie.infos }}</p>
+                    <div class="row mb-2">
+                        <label class="cell-6 text-right">Description et infos :</label>
+                        <div class="cell-6">
+                            <p>{{ sortie.infos }}</p>
+                        </div>
                     </div>
-                </div>
+
             </div>
-        </div>
-        
-        <div class="cell-6">
-            <div class="p-4">
-                <div class="row mb-2">
-                    <label class="cell-sm-6">Ville organisatrice :</label>
-                    <div class="cell-sm-6">
-                        <p>{{ ville_orga }}</p>
+            
+            <div class="cell-12 cell-md-6">
+
+                    <div class="row mb-2">
+                        <label class="cell-6 text-right">Ville organisatrice :</label>
+                        <div class="cell-6">
+                            <p>{{ ville_orga }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <label class="cell-sm-6">Lieu :</label>
-                    <div class="cell-sm-6">
-                        <p>{{ sortie.lieu.nom }}</p>
+                    <div class="row mb-2">
+                        <label class="cell-6 text-right">Lieu :</label>
+                        <div class="cell-6">
+                            <p>{{ sortie.lieu.nom }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <label class="cell-sm-6">Rue :</label>
-                    <div class="cell-sm-6">
-                        <p>{{ sortie.lieu.rue }}</p>
+                    <div class="row mb-2">
+                        <label class="cell-6 text-right">Rue :</label>
+                        <div class="cell-6">
+                            <p>{{ sortie.lieu.rue }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <label class="cell-sm-6">Code postal :</label>
-                    <div class="cell-sm-6">
-                        <p>{{ sortie.lieu.ville.cp }}</p>
+                    <div class="row mb-2">
+                        <label class="cell-6 text-right">Code postal :</label>
+                        <div class="cell-6">
+                            <p>{{ sortie.lieu.ville.cp }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <label class="cell-sm-6">Latitude :</label>
-                    <div class="cell-sm-6">
-                        <p>{{ sortie.lieu.latitude }}</p>
+                    <div class="row mb-2">
+                        <label class="cell-6 text-right">Latitude :</label>
+                        <div class="cell-6">
+                            <p>{{ sortie.lieu.latitude }}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-2">
-                    <label class="cell-sm-6">Longitude :</label>
-                    <div class="cell-sm-6">
-                        <p>{{ sortie.lieu.longitude }}</p>
+                    <div class="row mb-2">
+                        <label class="cell-6 text-right">Longitude :</label>
+                        <div class="cell-6">
+                            <p>{{ sortie.lieu.longitude }}</p>
+                        </div>
                     </div>
-                </div>
+
             </div>
-        </div>
+
     </div>
 </div>
 
