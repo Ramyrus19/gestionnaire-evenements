@@ -3,44 +3,78 @@
 {% block title %}Sortie index{% endblock %}
 
 {% block body %}
-<div class="h-vh-100">
-    <h1>Mes sortie :</h1>
+<div class="h-vh-100 ">
 
+    <div class="row d-flex" style="flex-flow:row wrap;width:100%">
+        <div class="cell-12 cell-md-6">
+            <h2>Mes sorties :</h2>
+        </div>
+        <div class="cell-6 d-none d-flex-md text-right" style="align-items: end; justify-content: end; flex-flow: column-reverse">
+            <p>Participant : {{ app.user.userName }}</p>
+            <p>Date du jour : {{ "now"|date("Y-m-d") }}</p>
+        </div>
+    </div>
     {% for message in app.flashes('notice') %}
-        <div class="flash-notice">{{ message }}</div>
+       <div class="bg-red fg-white padding10 text-shadow">
+    &nbsp;{{ message }}</div>
     {% endfor %}
 
 <!-- #filtres -->
 <div class="d-none d-block-md">
-    <h5>Filtrer les sorties</h5>
 
-    <div>
+    <h4>Filtrer les sorties</h4>
+
     <form action="{{ path("sortie_index") }}" method="POST">
-    <div>Site : <select name="filter_site">
-                <option value="">(Indéfini)</option>
-                {% for site in sites %}<option value="{{ site.id }}">{{ site.nom }}</option>{% endfor %}
-            </select><br>
-    <label>
-     nom de sortie :
-     </label>
-     <input type="text" data-role="input" data-search-button="true" name="filter_nom">
-     
-     <br> date :<input type="date" name="filtre_datedebut"> <input type="date" name="filtre_datefin"> 
-     
+    <div class="row">
+    <div class="cell-4">
+            <div class="row mb-2">
+                <label class="cell-md-6 cell-lg-4">Site :</label>
+                <div class="cell-md-6 cell-lg-8 input">
+                    <select name="filter_site" style="border:none;width:100%" data-role="select">
+                        <option value="">(Tous)</option>
+                        {% for site in sites %}<option value="{{ site.id }}">{{ site.nom }}</option>{% endfor %}
+                    </select>
+                </div>
+            </div>
+    
+            <div class="row mb-2">
+                <label class="cell-md-6 cell-lg-4">Nom de sortie :</label>
+                <div class="cell-md-6 cell-lg-8 input">
+                    <input type="text" data-role="input" data-search-button="true" name="filter_nom">
+                </div>
+            </div>
+    
+            <div class="row mb-2" style="align-items:baseline">
+                <label class="cell-4">Date :</label>
+                <div class="cell-4">
+                <div class="input mr-1">
+                    <input type="date" name="filtre_datedebut">
+                </div>
+                </div>
+                <div class="cell-4">
+                <div class="input">
+                    <input type="date" name="filtre_datefin">
+                </div>
+                </div>
+            </div>
+
      </div>
-    <div>
-    <input type="checkbox" name="filter_orga">Sorties dont je suis l'organisateur/trice<br>
-    <input type="checkbox" name="filter_inscrit">Sorties auxquelles je suis inscrit/e <br>
-    <input type="checkbox" name="filter_pas_inscrit">Sorties auxquelles je ne suis pas inscrit/e<br>
-    <input type="checkbox" name="filter_passees">Sorties passées<br>
+
+    <div class="cell-4">
+        <div class="ml-5" style="top:-8px">
+            <input type="checkbox" data-role="checkbox" name="filter_orga" data-caption="Sorties dont je suis l'organisateur/trice" data-cls-caption="text-bold"><br>
+            <input type="checkbox" data-role="checkbox" name="filter_inscrit" data-caption="Sorties auxquelles je suis inscrit/e" data-cls-caption="text-bold"> <br>
+            <input type="checkbox" data-role="checkbox" name="filter_pas_inscrit" data-caption="Sorties auxquelles je ne suis pas inscrit/e" data-cls-caption="text-bold"><br>
+            <input type="checkbox" data-role="checkbox" name="filter_passees" data-caption="Sorties passées" data-cls-caption="text-bold"><br>
+        </div>
     </div>
-    <div>
-    Date du jour : {{ "now"|date("Y-m-d") }}<br>
-    Participant : {{ app.user.userName }}<br>
-    <input type="submit" value="rechercher">
+
+    <div class="cell-4">
+        <input class="button info large rounded" type="submit" value="rechercher">
+    </div>
+
     </div>
     </form>
-    </div>
 
 </div>
 <!-- fin filtres -->
@@ -53,8 +87,9 @@
         data-rownum="true"
         data-check="true"
         data-check-style="2"
-        data-cls-table-top="d-none d-block-md"
-        data-table-info-title="Listes des Sorties">
+        data-cls-table-top="d-none d-flex-md"
+        data-table-info-title="Listes des Sorties"
+        data-horizontal-scroll="true">
         <thead>
             <tr>
                 <th>Nom de la sortie</th>
@@ -80,7 +115,7 @@
                     {% endif %}
                     <span class="d-none d-block-md">{{ sortie.nom }}</span></td>
                 <td>{{ sortie.dateDebut ? sortie.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ sortie.dateCloture ? sortie.dateCloture|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ sortie.dateCloture ? sortie.dateCloture|date('Y-m-d') : '' }}</td>
                 <td>{{ sortie.participants | length}} / {{ sortie.nbPlaces }}</td>
                 <td>{{ sortie.etat.libelle }}</td>
                 <td>
@@ -126,7 +161,9 @@
         {% endfor %}
         </tbody>
     </table>
-
+<div class="d-none d-block-md">
     <a class="button success" href="{{ path('sortie_new') }}" title="Créer une nouvelle Sortie"><span class="mif-plus"></span></a>
+</div>
+
 </div>
 {% endblock %}
