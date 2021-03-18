@@ -39,7 +39,7 @@ class ParticipantController extends AbstractController
      */
     public function index(Request $request, ParticipantRepository $participantRepository, CsvImport $csvImport): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_USER');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $form = $this->createFormBuilder()
             ->add('csvfile', FileType::class, [
                 'label' => false,
@@ -174,7 +174,11 @@ class ParticipantController extends AbstractController
 
                     $this->getDoctrine()->getManager()->flush();
 
-                    return $this->redirectToRoute('participant_index');
+                    if ($this->isGranted('ROLE_ADMIN')){
+                        return $this->redirectToRoute('participant_index');
+                    }else{
+                        return $this->redirectToRoute('sortie_index');
+                    }
                 }else{
                     $this->getDoctrine()->getManager()->refresh($participant);
                 }
