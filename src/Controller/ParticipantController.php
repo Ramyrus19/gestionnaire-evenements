@@ -169,6 +169,9 @@ class ParticipantController extends AbstractController
 
                             $participant->setUrlPhoto($fileName);
                         }
+                    }else{
+                        $this->getDoctrine()->getManager()->refresh($participant);
+                        $participant->setUrlPhoto($participant->getUrlPhoto());
                     }
 
                     $this->getDoctrine()->getManager()->persist($participant);
