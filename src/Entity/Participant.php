@@ -7,10 +7,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
- * @UniqueEntity(fields={"pseudo"}, message="There is already an account with this pseudo")
+ * @UniqueEntity(fields={"pseudo"}, message="Il existe déjà un compte avec ce pseudo")
+ * @UniqueEntity(fields={"mail"}, message="Il existe déjà un compte avec cette adresse mail")
  */
 class Participant implements UserInterface
 {
@@ -23,6 +25,8 @@ class Participant implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="Veuillez reinseigner un pseudo")
+     * @Assert\Length(max=180, maxMessage="Pseudo trop long. Nombre maximum de caractères: {{ limit }}")
      */
     private $pseudo;
 
@@ -34,26 +38,41 @@ class Participant implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     *
      */
     private $password;
     
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\NotBlank(message="Veuillez reinseigner un nom")
+     * @Assert\Length(max=30, maxMessage="Nom trop long. Nombre maximum de caractères: {{ limit }}")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\NotBlank(message="Veuillez reinseigner un prénom")
+     * @Assert\Length(max=30, maxMessage="Prénom trop long. Nombre maximum de caractères: {{ limit }}")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=15, nullable=true)
+     * @Assert\NotBlank
+     * @Assert\Regex(
+     *     pattern="/^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/",
+     *     message="Veuillez reinseigner un numéro de téléphone valid"
+     * )
+     * @Assert\Length(max=15, maxMessage="Numéro de téléphone trop long. Nombre maximum de caractères: {{ limit }}")
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Assert\Email(
+     *     message = "L'adresse mail '{{ value }}' n'est pas une adresse mail valide."
+     * )
+     * @Assert\Length(max=50, maxMessage="Adresse mail trop longue. Nombre maximum de caractères: {{ limit }}")
      */
     private $mail;
     
@@ -69,6 +88,11 @@ class Participant implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=250, nullable=true)
+     * @Assert\File(
+     *     maxSize = "2048k",
+     *     mimeTypes = {"image/jpeg", "image/jpg", "image/png"},
+     *     mimeTypesMessage = "Format image invalid ! Formats acceptés: png, jpg, jpeg"
+     * )
      */
     private $urlPhoto;
 
@@ -79,7 +103,7 @@ class Participant implements UserInterface
 
     /**
      * @ORM\ManyToOne(targetEntity=Site::class)
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $site;
 

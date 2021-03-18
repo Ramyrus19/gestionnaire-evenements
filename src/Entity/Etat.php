@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\EtatRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EtatRepository::class)
@@ -19,6 +20,8 @@ class Etat
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\NotBlank(message="Veuillez reinseigner une libellé")
+     * @Assert\Length(max=30, maxMessage="Libellé trop longue. Nombre maximum de caractères: {{ limit }}")
      */
     private $libelle;
 

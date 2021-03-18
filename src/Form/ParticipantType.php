@@ -117,7 +117,6 @@ class ParticipantType extends AbstractType
                 ->add('site', EntityType::class, [
                     'class' => Site::class,
                     'choice_label' => 'nom',
-                    'required' => false,
                     'label' => false,
                     'attr' => [
                         'data-role' => 'select',

@@ -6,6 +6,7 @@ use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SortieRepository::class)
@@ -21,6 +22,8 @@ class Sortie
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\NotBlank(message="Veuillez reinseigner un nom")
+     * @Assert\Length(max=30, maxMessage="Nom trop long. Nombre maximum de caractères: {{ limit }}")
      */
     private $nom;
 
@@ -31,6 +34,11 @@ class Sortie
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 1440,
+     *      notInRangeMessage = "La durée maximale d'un évènement est {{ max }} minutes (24 h)",
+     * )
      */
     private $duree;
 
@@ -41,23 +49,29 @@ class Sortie
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 5000,
+     *      notInRangeMessage = "Maximum {{ max }} places",
+     * )
      */
     private $nbPlaces;
 
     /**
      * @ORM\Column(type="string", length=500, nullable=true)
+     * @Assert\Length(max=500, maxMessage="Description trop longue. Nombre maximum de caractères: {{ limit }}")
      */
     private $infos;
 
     /**
      * @ORM\ManyToOne(targetEntity=Lieu::class)
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $lieu;
 
     /**
      * @ORM\ManyToOne(targetEntity=Site::class)
-     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $site;
 

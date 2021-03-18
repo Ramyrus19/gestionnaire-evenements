@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\LieuRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=LieuRepository::class)
@@ -19,21 +20,34 @@ class Lieu
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\NotBlank(message="Veuillez reinseigner un nom")
+     * @Assert\Length(max=30, maxMessage="Nom trop long. Nombre maximum de caractères: {{ limit }}")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
+     * @Assert\NotBlank(message="Veuillez reinseigner une rue")
+     * @Assert\Length(max=30, maxMessage="Adresse trop longue. Nombre maximum de caractères: {{ limit }}")
      */
     private $rue;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     *
+     * @Assert\Regex(
+     *     pattern="/^(-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)$/",
+     *     message="Veuillez reinseigner des coordonnées valides"
+     * )
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Assert\Regex(
+     *     pattern="/^(-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)$/",
+     *     message="Veuillez reinseigner des coordonnées valides"
+     * )
      */
     private $longitude;
 

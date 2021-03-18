@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Participant;
+use App\Entity\Sortie;
 use App\Entity\Ville;
 use App\Form\VilleType;
 use App\Repository\VilleRepository;
@@ -86,12 +88,30 @@ class VilleController extends AbstractController
      */
     public function delete(Request $request, Ville $ville): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$ville->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($ville);
-            $entityManager->flush();
+        $allSorties = [];
+        foreach ($ville->getLieux() as $lieu){
+            $sortiesByLieu = $this->getDoctrine()->getManager()->getRepository(Sortie::class)->findBy(['lieu' => $lieu->getId()]);
+            if ($sortiesByLieu){
+                array_push($allSorties, $sortiesByLieu);
+            }
         }
 
-        return $this->redirectToRoute('ville_index');
+        if ($this->isCsrfTokenValid('delete'.$ville->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            if(empty($allSorties)){
+                $entityManager->remove($ville);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('ville_index');
+            }else{
+                $this->addFlash(
+                    'error',
+                    'Cette ville ne peut pas être supprimé !'
+                );
+            }
+
+        }
+
+        return $this->redirectToRoute('ville_edit', ['id' => $ville->getId()]);
     }
 }

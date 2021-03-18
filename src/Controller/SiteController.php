@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Participant;
 use App\Entity\Site;
 use App\Form\SiteType;
 use App\Repository\SiteRepository;
@@ -83,12 +84,23 @@ class SiteController extends AbstractController
      */
     public function delete(Request $request, Site $site): Response
     {
+        $participants = $this->getDoctrine()->getManager()->getRepository(Participant::class)->findBy(['site' => $site->getId()]);
+
         if ($this->isCsrfTokenValid('delete'.$site->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($site);
-            $entityManager->flush();
+            if (empty($participants)){
+                $entityManager->remove($site);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('site_index');
+            }else{
+                $this->addFlash(
+                    'error',
+                    'Ce site ne peut pas être supprimé !'
+                );
+            }
         }
 
-        return $this->redirectToRoute('site_index');
+        return $this->redirectToRoute('site_edit', ['id' => $site->getId()]);
     }
 }
