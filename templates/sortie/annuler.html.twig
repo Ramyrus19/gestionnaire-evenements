@@ -11,8 +11,8 @@
         Date de la sortie : {{ sortie.dateDebut |date("Y-m-d")}}<br>
         Ville organisatrice : {{ ville_orga }}<br>
         Lieu : {{ sortie.lieu.nom}}<br>
-        Modif :
-        {{ form_widget(form.infos) }}
+        Motif :
+        {{ form_widget(form.infos, {'value' : ''}) }}
         <div style="display:none">{{ form_rest(form) }}</div>
         <button class="btn">{{ button_label|default('Enregistrer') }}</button>
 

@@ -7,6 +7,9 @@
 
     <div class="cell-12 text-center">
         <h4>Afficher une sortie</h4>
+        {% if sortie.etat.id == 6 %}
+        <h4 class='fg-red'> Cette Sortie est ANNULEE </h4>
+        {% endif %}
     </div>
 
     <div class="cell-12 d-flex p-0" style="flex-flow:row wrap">

@@ -226,8 +226,8 @@ window.addEventListener("load",init,false);
             <div class="row mb-2">
                 <label class="cell-md-6 cell-lg-4">Lieu :</label>
                 <div class="cell-md-6 cell-lg-8 input">
-                    {{ form_row(form.lieu) }}   
-                     <button class="button light shadowed mif-plus" onclick="switch_visible_lieuadd(1)">
+                    {{ form_row(form.lieu, { 'attr': {'style':'border:0;width:100%' }} )}}   
+                     <button type="button" class="button light shadowed mif-plus" onclick="switch_visible_lieuadd(1)">
                 </div>
                 
             </div>
